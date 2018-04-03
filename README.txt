@@ -1,0 +1,32 @@
+--- RS1 by Jessica Van Brummelen ---
+
+Chosen Paper:
+Ephemeral Adaptation: The Use of Gradual Onset to Improve Menu Selection Performance
+
+List of the people I discussed this assignment with:
+- Geeticka Chauhan
+- Felix Naser
+- Vaikkunth Mugunthan
+- todo
+
+URL of my YouTube/Vimeo screencast:
+todo
+
+
+URL of my experiment implementation:
+todo
+
+How tasks are sequenced in my experimental implementation:
+todo
+
+What the experimental parameters in your implementation are:
+todo
+
+How these parameters can be be adjusted:
+todo
+
+What data is collected for each trial run and in what format:
+todo
+
+What demographic data or subjective judgements are collected from each user, and why:
+todo
