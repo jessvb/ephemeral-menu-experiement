@@ -30,3 +30,7 @@ todo
 
 What demographic data or subjective judgements are collected from each user, and why:
 todo
+
+List of websites I referenced:
+- https://www.sitepoint.com/the-right-way-to-make-a-dropdown-menu/
+- https://stackoverflow.com/questions/13952686/how-to-make-html-input-tag-only-accept-numerical-values

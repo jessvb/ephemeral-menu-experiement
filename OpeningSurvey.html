@@ -1,0 +1,57 @@
+<!-- todo del button to go to actual experiment -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Use mobile-aware viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Experiment Information</title>
+
+    <!-- Load style sheets -->
+    <link rel="stylesheet" href="generalStyle.css">
+
+    <!-- JavaScript -->
+    <script src="survey.js"></script>
+    <script src="util.js"></script>
+</head>
+
+<body>
+    <div id="wholeSiteWrap">
+        <div id="titleArea">
+            <h1>Gradual Onset Menu Experiment</h1>
+        </div>
+        <div id="infoArea">
+            <h2>Survey</h2>
+            <div class="survey">
+                <div class="question">How old are you?</div>
+                <input type="number" min="16" max="99" placeholder="23">
+
+                <!-- input box - max 2 chars; ensure it's a number -->
+                <div class="question">What is your sex?</div>
+                <select>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="na">Prefer not to answer</option>
+                </select>
+                <div class="question">How often do you use a computer?</div>
+                <select>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="rarely">Rarely</option>
+                    <option value="never">Never</option>
+                </select>
+            </div>
+        </div>
+        <div id="buttonArea">
+            <a href="GradualOnsetExperiment.html" class="button" id="submit">Start Experiment</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

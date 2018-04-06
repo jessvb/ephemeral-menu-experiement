@@ -1,0 +1,17 @@
+/* Style for experiment. Contains menu constants etc. */
+
+/* Jessica Van Brummelen */
+
+:root {
+    /* Colour Variables */
+    --colour-background: #ceeedf;
+    --colour-menu-background: #bbbbbb;
+    --colour-menu-outline: #555555;
+    --colour-menu-mouse-over: #3aa5b1;
+    --colour-menu-font: #1f1f1f;
+    /* Sizes */
+    --site-padding-size: 2em;
+    /* Animations */
+    --anim-onset-delay: 500; /* ms */
+}
+

@@ -1,8 +1,55 @@
-<!-- page with video to "shows each task to the user, with instructions if appropriate" -->
+<!-- todo del button to go to actual experiment -->
 
-<!-- initially tells the user how long they should expect to test the interface (~15 minutes), 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Use mobile-aware viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>General Information</title>
+
+    <!-- Load style sheets -->
+    <link rel="stylesheet" href="generalStyle.css">
+</head>
+
+<body>
+    <div id="wholeSiteWrap">
+        <div id="titleArea">
+            <h1>Gradual Onset Menu Experiment</h1>
+        </div>
+        <div id="infoArea">
+            <h2>Experiment Information</h2>
+            <p>Todo: put experiment info here</p>
+            <!-- todo del initially tells the user how long they should expect to test the interface (~15 minutes), 
     and includes an ending message to notify users when they have finished the experiment. 
     Good practice would be to show the user their progress in completing the experiment as 
     they go. -->
 
-<!-- button to go to actual experiment -->
+            <h2>How the Experiment Works</h2>
+            <p>Please watch the following experiment tasks video before proceeding.</p>
+            <!-- todo del page with video to "shows each task to the user, with instructions if appropriate" -->
+
+            <video src="media/TODO_Placeholder_Video.mp4" controls>
+                <p>Your browser doesn't support HTML5 video. Here is a
+                    <a href="media/TODO_Placeholder_Video.mp4">link to the video</a> instead.</p>
+            </video>
+            <h2>Survey</h2>
+            <p>If you agree to participate in this experiment, please proceed to the next page to complete a brief survey.</p>
+        </div>
+        <div id="buttonArea">
+            <a id="begin" href="" class="button">Begin Survey</a>
+            <script>
+                let userID = Math.floor(Math.random() * Math.floor(999999));
+                let url = 'OpeningSurvey.html?userID=' + userID;
+                let btn = document.getElementById("begin");
+                btn.setAttribute("href",url);
+                console.log(url);
+            </script>
+        </div>
+    </div>
+
+</body>
+
+</html>
