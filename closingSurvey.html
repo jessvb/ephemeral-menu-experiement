@@ -1,0 +1,84 @@
+<!-- Once the experiment is done, come to this page -->
+
+<!-- survey to: "collect the necessary demographic information and subjective feedback 
+    from users" -->
+
+<!--  Pay close attention to any subjective 
+         judgements that users are asked to make about the conditions, and make sure 
+         that your experiment implementation collects those judgements from its users as 
+         well. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Use mobile-aware viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Closing Survey</title>
+
+    <!-- Load style sheets -->
+    <link rel="stylesheet" href="generalStyle.css">
+    <link rel="stylesheet" href="closingSurveyStyle.css">
+
+    <!-- JavaScript -->
+    <script src="survey.js"></script>
+    <script src="closingSurvey.js"></script>
+    <!-- <script src="util.js"></script> todo del-->
+</head>
+
+<body>
+    <div id="wholeSiteWrap">
+        <div id="titleArea">
+            <h1>Gradual Onset Menu Experiment</h1>
+        </div>
+        <div id="infoArea">
+            <h2>Closing Survey</h2>
+
+            <!-- rank the menu types based on overall preference (I guess just which one you preferred in our case ;P) -->
+            <!-- four "likert scale questions" for the control and four likert q's for the ephemeral (scale from 1 to 7)-->
+            <!-- (then combine these likert scale q's to get an overall satisfaction score) -->
+
+            <div class="survey">
+                <div class="ques">Which menu type did you prefer?</div>
+                <div class="ans" id='menuPref'>
+                    <label>
+                        <input type="radio" name="menuType" value="basicMenu">Basic menu (no fading items)
+                    </label>
+
+                    <label>
+                        <input type="radio" name="menuType" value="gradualOnset">Menu with fading items
+                    </label>
+                </div>
+                <div class="likertDef">
+                    <div>todo likert less</div>
+                    <div>Neutral</div>
+                    <div>todo likert more</div>
+                </div>
+                <div class="ques">todo Likert scale question 1...</div>
+                <div class="ans likert" id='graduallikert1'></div>
+                <div class="ques">todo Likert scale question 2...</div>
+                <div class="ans likert" id='graduallikert2'></div>
+                <div class="ques">todo Likert scale question 3...</div>
+                <div class="ans likert" id='graduallikert3'></div>
+                <div class="ques">todo Likert scale question 4...</div>
+                <div class="ans likert" id='graduallikert4'></div>
+                <div class="ques">todo Likert scale question 5...</div>
+                <div class="ans likert" id='basiclikert1'></div>
+                <div class="ques">todo Likert scale question 6...</div>
+                <div class="ans likert" id='basiclikert2'></div>
+                <div class="ques">todo Likert scale question 7...</div>
+                <div class="ans likert" id='basiclikert3'></div>
+                <div class="ques">todo Likert scale question 8...</div>
+                <div class="ans likert" id='basiclikert4'></div>
+            </div>
+        </div>
+        <div id="buttonArea">
+            <input type="button" class="button" id="submit" value="Submit">
+        </div>
+    </div>
+
+</body>
+
+</html>

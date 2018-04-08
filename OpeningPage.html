@@ -39,13 +39,14 @@
             <p>If you agree to participate in this experiment, please proceed to the next page to complete a brief survey.</p>
         </div>
         <div id="buttonArea">
-            <a id="begin" href="" class="button">Begin Survey</a>
+            <input type="button" class="button" id="begin" value="Begin Survey">
             <script>
                 let userID = Math.floor(Math.random() * Math.floor(999999));
-                let url = 'OpeningSurvey.html?userID=' + userID;
+                let url = 'openingSurvey.html?userID=' + userID;
                 let btn = document.getElementById("begin");
-                btn.setAttribute("href",url);
-                console.log(url);
+                btn.addEventListener('click', function () {
+                    window.location.href = url;
+                });
             </script>
         </div>
     </div>

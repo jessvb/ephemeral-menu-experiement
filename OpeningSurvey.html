@@ -8,14 +8,16 @@
     <!-- Use mobile-aware viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Experiment Information</title>
+    <title>Opening Survey</title>
 
     <!-- Load style sheets -->
     <link rel="stylesheet" href="generalStyle.css">
+    <link rel="stylesheet" href="openingSurveyStyle.css">
 
     <!-- JavaScript -->
     <script src="survey.js"></script>
-    <script src="util.js"></script>
+    <script src="openingSurvey.js"></script>
+    <!-- <script src="util.js"></script> todo del-->
 </head>
 
 <body>
@@ -24,31 +26,35 @@
             <h1>Gradual Onset Menu Experiment</h1>
         </div>
         <div id="infoArea">
-            <h2>Survey</h2>
+            <h2>Demographic Survey</h2>
             <div class="survey">
-                <div class="question">How old are you?</div>
-                <input type="number" min="16" max="99" placeholder="23">
+                <div class="ques">How old are you?</div>
+                <input class="ans" id='age' type="number" min="16" max="99" placeholder="e.g., 23">
 
                 <!-- input box - max 2 chars; ensure it's a number -->
-                <div class="question">What is your sex?</div>
-                <select>
+                <div class="ques">What is your sex?</div>
+                <select class="ans" id='sex'>
+                    <option value="select">Select...</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                     <option value="na">Prefer not to answer</option>
                 </select>
-                <div class="question">How often do you use a computer?</div>
-                <select>
+                <div class="ques">How often do you use a computer?</div>
+                <select class="ans" id='compUsage'>
+                    <option value="select">Select...</option>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
                     <option value="monthly">Monthly</option>
                     <option value="rarely">Rarely</option>
                     <option value="never">Never</option>
                 </select>
+                <div class="ques">What is your email address?</div>
+                <input class="ans" id='email' type="text" placeholder="e.g., user@mit.edu">
             </div>
         </div>
         <div id="buttonArea">
-            <a href="GradualOnsetExperiment.html" class="button" id="submit">Start Experiment</a>
+            <input type="button" class="button" id="submit" value="Start Experiment">
         </div>
     </div>
 

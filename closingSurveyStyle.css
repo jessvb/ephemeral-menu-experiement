@@ -1,0 +1,36 @@
+/* CSS specific to the closing survey */
+
+.survey {
+    display: grid;
+    grid-template-columns: auto 60%;
+    grid-column-gap: 1em;
+    grid-row-gap: 0.3em;
+    max-width: 60em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ques {
+    text-align: left;
+    font-weight: bold;
+}
+
+.ans {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0.75em;
+}
+
+label {
+    margin-right: 1em;
+    text-align: left;
+}
+
+.likertDef {
+    display: flex;
+    justify-content: space-between;
+    grid-column: 2 / 3;
+    margin-top: 1em;
+    margin-bottom: 0em;
+    font-weight: bold;
+}

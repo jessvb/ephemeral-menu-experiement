@@ -1,4 +1,5 @@
 /* Style for experiment and opening/closing screens. */
+
 /* Loosely based on: https://getbootstrap.com/docs/3.3/examples/cover/ */
 
 /* Jessica Van Brummelen */
@@ -13,6 +14,7 @@
     --colour-dark-grey: hsl(0, 0%, 19%);
     --colour-white: white;
     --colour-black: black;
+    --colour-btn-disabled: rgb(136, 136, 136);
     /* Sizes */
     --site-padding-size: 2em;
 }
@@ -54,37 +56,23 @@ h2 {
     margin-bottom: 3em;
 }
 
-a.button {
-    text-decoration: none;
+input.button {
     border: none;
     background-color: var(--colour-white);
     padding: 0.6em 1.2em;
     color: var(--colour-dark-grey);
     font-weight: bold;
     border-radius: 0.3rem;
-    text-align: center;
-    vertical-align: middle;
+    cursor: pointer;
+}
+
+input.button.disabled {
+    background-color: var(--colour-btn-disabled);
+    cursor: default;
 }
 
 video {
     padding-bottom: 1em;
     max-width: calc(100vw - var(--site-padding-size) * 2);
     max-height: 75vh;
-}
-
-.survey {
-    display: grid;
-    grid-template-columns: auto 6em;
-    grid-gap: 0.3em;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.question {
-    text-align: left;
-}
-
-.answer {
-    grid-column: 1 / 1;
 }
