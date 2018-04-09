@@ -3,7 +3,9 @@
 // For simpler testing, always use the same seed:
 Math.seedrandom(0);
 
+// ------------------------------ //
 // --- Variables to be logged --- //
+// ------------------------------ //
 // userID for this particular experiment (assoc w survey too):
 let userID = new URL(location).searchParams.get('userID');
 // increment currentTestNum before every test:
@@ -15,8 +17,21 @@ let wrongItemClick = true;
 // increment this on every click:
 let clickNumber = 0;
 
+// ------------------ //
+// --- On Startup --- //
+// ------------------ //
+document.addEventListener('DOMContentLoaded', function(event) {
+  console.log('DOM fully loaded and parsed');
+  // Create menus with four subsections each and four items within each
+  // subsection
+  let numBlocks = 4;
+  let numItems = 4;
+  createMenus(numBlocks, numItems);
+});
 
+// ----------------------- //
 // --- Event Listeners --- //
+// ----------------------- //
 document.addEventListener('mousedown', function(evt) {
   // send information to the Google Form
   document.dispatchEvent(new CustomEvent('log', {
@@ -59,6 +74,45 @@ document.addEventListener('mousedown', function(evt) {
   }
   // if this was a menuitem, check if it was the correct item
 });
+
+
+// ---------------------- //
+// --- Helper Methods --- //
+// ---------------------- //
+/**
+ * Create menus wherever 'menutitle's are placed in the HTML document. Each menu
+ * will have numBlocks number of blocks of related items. Each block will
+ * contain numItems number of items.
+ * @param {Integer} numBlocks
+ * @param {Integer} numItems
+ */
+function createMenus(numBlocks, numItems) {
+  // Find menu divs in the html
+  let menutitles = document.getElementsByClassName('menutitle');
+  // Create menudropdowns for each menutitle
+  for (let i = 0; i < menutitles.length; i++) {
+    let innerHTMLString = 'Menu' + (i + 1) + '<div class="menudropdown">';
+    for (let numBlock = 0; numBlock < numBlocks; numBlock++) {
+      // create block
+      innerHTMLString += '<div class="menublock">';
+      for (let numItem = 0; numItem < numItems; numItem++) {
+        // the item in the menu TODO:
+        let item = 'item';
+        // create menuitem
+        innerHTMLString += '<div class="menuitem">' + item + '</div>'
+      }
+      // end div for menublock
+      innerHTMLString += '</div>';
+    }
+    // end div for menudropdown
+    innerHTMLString += '</div>';
+
+    // place the innerHTMLString in the menutitle div:
+    console.log('innerhtmlstring:', innerHTMLString);
+
+    menutitles.item(i).innerHTML = innerHTMLString;
+  }
+}
 
 function toggleShowMenu(menudropdown) {
   // menudropdown.classList.toggle('showmenu');
