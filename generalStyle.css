@@ -6,11 +6,6 @@
 
 :root {
     /* Colour Variables */
-    --colour-light-green: #ceeedf;
-    --colour-pale-blue: #7fcdd6;
-    --colour-pale-yellow: #fcf8d4;
-    --colour-slate-blue: #5a807e;
-    --colour-light-grey: hsl(0, 0%, 77%);
     --colour-dark-grey: hsl(0, 0%, 19%);
     --colour-white: white;
     --colour-black: black;

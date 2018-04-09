@@ -32,10 +32,12 @@ What demographic data or subjective judgements are collected from each user, and
 todo
 
 List of websites I referenced while programming the experiment:
-- https://www.sitepoint.com/the-right-way-to-make-a-dropdown-menu/
 - https://stackoverflow.com/questions/13952686/how-to-make-html-input-tag-only-accept-numerical-values
 - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 - https://stackoverflow.com/questions/558721/css-classes-subclasses
 https://stackoverflow.com/questions/3087975/how-can-i-make-the-cursor-a-hand-when-a-user-hovers-over-a-list-item
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
+- https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
+- https://stackoverflow.com/questions/6900124/how-to-make-certain-text-not-selectable-with-css
+- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown

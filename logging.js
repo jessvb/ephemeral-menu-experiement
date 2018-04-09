@@ -24,7 +24,6 @@ function initLoggingEvents() {
     },
     'log': function(evt) {
       var detail = evt.detail;
-      console.log('!!!!!!!!!!! evt.detail:', detail);
       logEvent(
           detail, detail.customName, detail.clickNumber, detail.currentTestNum,
           detail.startOrEndEvent, detail.wrongItemClick);

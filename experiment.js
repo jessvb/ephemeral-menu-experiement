@@ -1,3 +1,6 @@
+// TODO: MAKE IT SO ONLY ONE MENU CAN BE OPENED AT A TIME
+// TODO: MAKE THE MENUS BE CREATED USING JS, NOT HTML COPY-PASTED
+
 // For simpler testing, always use the same seed:
 Math.seedrandom(0);
 
@@ -11,11 +14,12 @@ let startOrEndEvent = 'start';
 // if this click was on an incorrect menu item, make this true:
 let wrongItemClick = true;
 // increment this on every click:
-let clickNumber = 0;  
+let clickNumber = 0;
 
 
 // --- Event Listeners --- //
 document.addEventListener('mousedown', function(evt) {
+  // send information to the Google Form
   document.dispatchEvent(new CustomEvent('log', {
     detail: {
       userID: userID,
@@ -27,4 +31,12 @@ document.addEventListener('mousedown', function(evt) {
       wrongItemClick: wrongItemClick
     }
   }));
+
+  let targ = evt.target;
+  // if this was a menutitle, open the menu
+  if (targ != null && targ.getAttribute('class') != null && targ.getAttribute('class').includes('menutitle')) {
+    let menudropdown = targ.getElementsByClassName('menudropdown')[0];
+    menudropdown.classList.toggle('showmenu');
+  }
+  // if this was a menuitem, check if it was the correct item
 });

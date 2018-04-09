@@ -1,17 +1,81 @@
+/* TODO: REMOVE THE MENU DROPDOWN OFFSET SOMEHOW... */
+
 /* Style for experiment. Contains menu constants etc. */
 
 /* Jessica Van Brummelen */
 
 :root {
     /* Colour Variables */
-    --colour-background: #ceeedf;
-    --colour-menu-background: #bbbbbb;
-    --colour-menu-outline: #555555;
+    --colour-background: #f1f1f1;
+    --colour-outer-outline: #5a5a5a;
+    --colour-menu-background: #cecece;
+    --colour-menu-outline: #c0c0c0;
     --colour-menu-mouse-over: #3aa5b1;
     --colour-menu-font: #1f1f1f;
     /* Sizes */
-    --site-padding-size: 2em;
+    --margin-size: 1em;
+    --padding-size: 1em;
     /* Animations */
-    --anim-onset-delay: 500; /* ms */
+    --anim-onset-delay: 500;
+    /* ms */
 }
 
+#experimentwrap {
+    margin: var(--margin-size);
+    color: var(--colour-menu-font);
+    /* Grid */
+    display: grid;
+    grid-row-gap: 0.5rem;
+}
+
+#promptarea {
+    grid-row: 1 / 2;
+    border: thick solid var(--colour-outer-outline);
+    background-color: var(--colour-background);
+    padding: var(--padding-size);
+}
+
+#menuarea {
+    grid-row: 2 / 3;
+    border: thick solid var(--colour-outer-outline);
+    background-color: var(--colour-background);
+    /* Grid */
+    display: grid;
+    grid-template-rows: fit-content(100%) 82vh;
+}
+
+#taskbar {
+    background-color: var(--colour-menu-background);
+    /* Grid */
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(100%)) auto;
+}
+
+.menutitle {
+    background-color: var(--colour-menu-background);
+    padding: calc(1 / 2 * var(--padding-size)) var(--padding-size);
+    cursor: pointer;
+    user-select: none;
+}
+
+.menudropdown {
+    display: none;
+    box-shadow: 0px calc(1 / 2 * var(--padding-size)) var(--padding-size) 0px rgba(0,0,0,0.2);
+    position: absolute;
+    min-width: 10em;
+    background-color: var(--colour-menu-background);
+    border: thin solid var(--colour-menu-outline);
+}
+
+.showmenu {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+}
+
+.menublock {
+    border: thin solid var(--colour-menu-outline);
+}
+
+.menuitem {
+    padding: calc(1 / 2 * var(--padding-size)) var(--padding-size);
+}
