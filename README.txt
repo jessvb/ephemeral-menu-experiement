@@ -41,3 +41,5 @@ https://stackoverflow.com/questions/3087975/how-can-i-make-the-cursor-a-hand-whe
 - https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/
 - https://stackoverflow.com/questions/6900124/how-to-make-certain-text-not-selectable-with-css
 - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown
+- https://stackoverflow.com/questions/5796654/css-rule-to-apply-only-if-element-has-both-classes
+- https://tomelliott.com/html-css/css-position-child-div-parent

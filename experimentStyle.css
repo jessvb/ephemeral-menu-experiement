@@ -1,5 +1,3 @@
-/* TODO: REMOVE THE MENU DROPDOWN OFFSET SOMEHOW... */
-
 /* Style for experiment. Contains menu constants etc. */
 
 /* Jessica Van Brummelen */
@@ -10,11 +8,12 @@
     --colour-outer-outline: #5a5a5a;
     --colour-menu-background: #cecece;
     --colour-menu-outline: #c0c0c0;
-    --colour-menu-mouse-over: #3aa5b1;
+    --colour-menu-selected: #3aa5b1;
     --colour-menu-font: #1f1f1f;
     /* Sizes */
     --margin-size: 1em;
     --padding-size: 1em;
+    --thin-border-size: 1px;
     /* Animations */
     --anim-onset-delay: 500;
     /* ms */
@@ -56,6 +55,12 @@
     padding: calc(1 / 2 * var(--padding-size)) var(--padding-size);
     cursor: pointer;
     user-select: none;
+    position: relative;
+}
+
+/* this selector is for when an element is BOTH menutitle AND menuselected */
+.menutitle.menuselected {
+    background-color: var(--colour-menu-selected);
 }
 
 .menudropdown {
@@ -64,7 +69,11 @@
     position: absolute;
     min-width: 10em;
     background-color: var(--colour-menu-background);
-    border: thin solid var(--colour-menu-outline);
+    border: var(--thin-border-size) solid var(--colour-menu-outline);
+    /* This is positioning it to the bottom of the menutitle */
+    top: calc(var(--padding-size) + 1em + var(--thin-border-size) * 2);
+    /* 2.1em; */
+    left: 0;
 }
 
 .showmenu {
@@ -73,7 +82,7 @@
 }
 
 .menublock {
-    border: thin solid var(--colour-menu-outline);
+    border: var(--thin-border-size) solid var(--colour-menu-outline);
 }
 
 .menuitem {
