@@ -1,4 +1,5 @@
-// TODO: MAKE THE MENUS BE CREATED USING JS, NOT HTML COPY-PASTED
+// This javascript file contains methods to set up the experiment, and calls
+// functions in experimentProcess to begin the experiment
 
 // For simpler testing, always use the same seed:
 Math.seedrandom(0);
@@ -7,6 +8,7 @@ Math.seedrandom(0);
 // --- Variables to be logged --- //
 // ------------------------------ //
 // userID for this particular experiment (assoc w survey too):
+// todo: get from localstorage instead
 let userID = new URL(location).searchParams.get('userID');
 // increment currentTestNum before every test:
 let currentTestNum = 0;
@@ -17,16 +19,37 @@ let wrongItemClick = true;
 // increment this on every click:
 let clickNumber = 0;
 
+// number of blocks within a menu:
+const NUM_BLOCKS = 4;
+// number of items within a block:
+const NUM_ITEMS = 4;
+// number of predicted items:
+const NUM_PREDICTED_ITEMS = 3;
+
 // ------------------ //
 // --- On Startup --- //
 // ------------------ //
 document.addEventListener('DOMContentLoaded', function(event) {
-  console.log('DOM fully loaded and parsed');
-  // Create menus with four subsections each and four items within each
+  // Create menus with NUMBLOCKS subsections each and NUMITEMS items within each
   // subsection
-  let numBlocks = 4;
-  let numItems = 4;
-  createMenus(numBlocks, numItems);
+  createMenus(NUM_BLOCKS, NUM_ITEMS);
+  updateMenus(NUM_BLOCKS, NUM_ITEMS);
+
+  // The accuracy is randomly chosen on a per-subject basis to be either high or
+  // low
+  const adaptiveAccuracy = getAccuracy();
+
+  // Whether the control or the fading menu tests are first depends on whether
+  // the user id is odd or even (every second user sees the fading menu tests
+  // first). I.e., control vs long-onset: within-subjects, fully counterbalanced
+  // TODO: is this correct?? or should it just be random?
+  let isControlFirst = true;
+  if (userID % 2 == 0) {
+    isControlFirst = false;
+  }
+
+  // Start the experiment
+  performExperiment(adaptiveAccuracy, isControlFirst);
 });
 
 // ----------------------- //
@@ -79,6 +102,7 @@ document.addEventListener('mousedown', function(evt) {
 // ---------------------- //
 // --- Helper Methods --- //
 // ---------------------- //
+
 /**
  * Create menus wherever 'menutitle's are placed in the HTML document. Each menu
  * will have numBlocks number of blocks of related items. Each block will
@@ -108,12 +132,14 @@ function createMenus(numBlocks, numItems) {
     innerHTMLString += '</div>';
 
     // place the innerHTMLString in the menutitle div:
-    console.log('innerhtmlstring:', innerHTMLString);
-
     menutitles.item(i).innerHTML = innerHTMLString;
   }
 }
 
+/**
+ * Toggle whether the menu provided is shown or not.
+ * @param {HTML element} menudropdown
+ */
 function toggleShowMenu(menudropdown) {
   // menudropdown.classList.toggle('showmenu');
   let menutitle = menudropdown.parentElement;
@@ -139,4 +165,16 @@ function hideAllMenus() {
     // remove the additional colour on the menutitle
     menutitle.setAttribute('class', 'menutitle');
   }
+}
+
+/**
+ * Randomly return an accuracy value of 'high' or 'low'. There is a 50%
+ * chance of getting 'high'.
+ */
+function getAccuracy() {
+  let acc = 'high';
+  if (Math.random() < 0.5) {
+    acc = 'low';
+  }
+  return acc;
 }

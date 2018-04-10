@@ -88,3 +88,7 @@
 .menuitem {
     padding: calc(1 / 2 * var(--padding-size)) var(--padding-size);
 }
+
+.hideexperiment {
+    display: none;
+}

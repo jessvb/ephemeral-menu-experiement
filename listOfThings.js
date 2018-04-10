@@ -42,7 +42,7 @@ function getListOfThings() {
   list.push(['Alternative', 'Blues', 'Rock', 'Classical']);
   list.push(['Sedan', 'Coupe', 'Compact', 'Convertible']);
   list.push(['Sarah', 'Amy', 'Kelly', 'Olivia']);
-  list.push(['Brett', 'David', 'Joseph', 'Zane']);
+  list.push(['Brett', 'David', 'Joe', 'Zane']);
   list.push(['Hermoine', 'Harry', 'Ginny', 'Ron']);
   list.push(['Draco', 'Scorpius', 'Bellatrix', 'Severus']);
   list.push(['Hufflepuff', 'Slytherin', 'Gryffindor', 'Ravenclaw']);
