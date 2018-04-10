@@ -65,13 +65,10 @@ function logEvent(
     wrongItemClick) {
   var time = (new Date).getTime();
   var name = customName || event.event.type;
-  var targetID = event.event.target.id ||
-      event.event.target
-          .className;  // todo -- is this what we want? localName or nodeName?
-
-  console.log(event.event.target);
+  var targetID = event.event.target.id || event.event.target.className;
 
   if (ENABLE_CONSOLE_LOGGING) {
+    console.log(event.event.target);
     console.log(
         uid, time, name, targetID, clickNumber, currentTestNum, startOrEndEvent,
         wrongItemClick);

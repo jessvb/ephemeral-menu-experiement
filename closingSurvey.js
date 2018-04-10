@@ -1,7 +1,6 @@
 // Get the user id as specified by the url parameter:
-let userID = new URL(location).searchParams.get('userID');
+let userID = localStorage.getItem("userID");
 // Make the url for the next page with the given userID:
-// todo: get from localstorage instead
 let url = 'closingPage.html?userID=' + userID;
 
 /* ******************************************************* */

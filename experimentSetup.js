@@ -8,8 +8,7 @@ Math.seedrandom(0);
 // --- Variables to be logged --- //
 // ------------------------------ //
 // userID for this particular experiment (assoc w survey too):
-// todo: get from localstorage instead
-let userID = new URL(location).searchParams.get('userID');
+let userID = localStorage.getItem("userID");
 // increment currentTestNum before every test:
 let currentTestNum = 0;
 // if the click starts a test, then put 'start', if it ends, put 'end':
@@ -120,7 +119,7 @@ function createMenus(numBlocks, numItems) {
       // create block
       innerHTMLString += '<div class="menublock">';
       for (let numItem = 0; numItem < numItems; numItem++) {
-        // the item in the menu TODO:
+        // the item in the menu:
         let item = 'item';
         // create menuitem
         innerHTMLString += '<div class="menuitem">' + item + '</div>'
