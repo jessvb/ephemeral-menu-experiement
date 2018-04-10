@@ -42,3 +42,6 @@ https://stackoverflow.com/questions/3087975/how-can-i-make-the-cursor-a-hand-whe
 - https://stackoverflow.com/questions/6900124/how-to-make-certain-text-not-selectable-with-css
 - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown
 - https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
+- https://stackoverflow.com/questions/18806210/generating-non-repeating-random-numbers-in-js
+- https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
+- https://stackoverflow.com/questions/16206322/how-to-get-js-variable-to-retain-value-after-page-refresh

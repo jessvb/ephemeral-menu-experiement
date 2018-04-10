@@ -41,7 +41,13 @@
         <div id="buttonArea">
             <input type="button" class="button" id="begin" value="Begin Survey">
             <script>
-                let userID = Math.floor(Math.random() * Math.floor(999999));
+                // initialize userID in local storage (which persists past browser restarts)
+                if (localStorage.getItem("userID") == null) {
+                    localStorage.setItem("userID", 0);
+                }
+                let userID = parseInt(localStorage.getItem("userID")) + 1;
+                localStorage.setItem("userID", userID);
+                console.log('userid:', userID);
                 let url = 'openingSurvey.html?userID=' + userID;
                 let btn = document.getElementById("begin");
                 btn.addEventListener('click', function () {
