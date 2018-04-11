@@ -4,13 +4,16 @@
 
 // stages in the experiment
 const STAGES = [
-  'practice', 'block1_half1', 'shortBreak1', 'block1_half2', 'block1_survey',
-  'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end'
+  'notifypractice', 'practice1', 'block1_half1', 'shortBreak1', 'block1_half2',
+  'block1_survey', 'block2_half1', 'shortBreak2', 'notifypractice', 'practice2',
+  'block2_half2', 'block2_survey', 'end'
 ];
+const NUM_PRACTICE_TESTS = 8;
+const NUM_TESTS_PER_BLOCK = 126;
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;
-// number of 
+// number of
 
 // current stage of the experiment
 let currStage;
@@ -53,34 +56,90 @@ function goToNextStage(stageIndex) {
   currStage = STAGES[stageIndex];
 
   // Do different things, depending on the stage:
+  let msg = '';
   switch (currStage) {
-    case 'practice':
+    case 'notifypractice':
       // show a notification screen telling the user that this is a practice run
+      let msg =
+          'The next stage is for you to practice using the system. When you are ready, click "Next".';
+      notify(msg);
+      break;
+    case 'practice1':
+      if (IS_CONTROL_FIRST) {
+        performPractice('control');
+      } else {
+        performPractice('fading');
+      }
       break;
     case 'block1_half1':
       if (IS_CONTROL_FIRST) {
-        performHalfControl();
+        // perform 1st half of control
+        performHalfBlock('control');
       } else {
-        performHalfFading();
+        // perform 1st half of fading
+        performHalfBlock('fading');
       }
       break;
     case 'shortBreak1':
-
+      msg =
+          'Feel free to take a short break. When you are ready to continue, click "Next".';
+      notify(msg);
       break;
     case 'block1_half2':
+      if (IS_CONTROL_FIRST) {
+        // perform 2nd half of control
+        performHalfBlock('control');
+      } else {
+        // perform 2nd half of fading
+        performHalfBlock('fading');
+      }
       break;
-
     case 'block1_survey':
+      if (IS_CONTROL_FIRST) {
+        // TODO: add gotonextstage in the submit buttons for the
+        // conditionsurveys show control survey
+        showElement('basicsurveywrap');
+      } else {
+        // show gradual survey
+        showElement('gradualsurveywrap');
+      }
       break;
     case 'block2_half1':
+      if (IS_CONTROL_FIRST) {
+        // perform 1st half of fading
+        performHalfBlock('fading');
+      } else {
+        // perform 1st half of control
+        performHalfBlock('control');
+      }
       break;
     case 'shortBreak2':
+      msg =
+          'Feel free to take a short break. When you are ready to continue, click "Next".';
+      notify(msg);
       break;
     case 'block2_half2':
+      if (IS_CONTROL_FIRST) {
+        // perform 2nd half of fading
+        performHalfBlock('fading');
+      } else {
+        // perform 2nd half of control
+        performHalfBlock('control');
+      }
       break;
     case 'block2_survey':
+      if (IS_CONTROL_FIRST) {
+        // show fading survey
+        showElement('gradualsurveywrap');
+      } else {
+        // show control survey
+        showElement('basicsurveywrap');
+      }
       break;
     case 'end':
+      msg =
+          'This completes the menu-clicking portion of the experiment. We have one last question for you, and then the experiment will be done.';
+      notify(msg);
       break;
     default:
       console.error(
@@ -91,21 +150,44 @@ function goToNextStage(stageIndex) {
 }
 
 /**
- * Performs a half-block of control menu tests.
+ * Performs the practice run.
+ * @param {String} controlOrFading: 'control' or 'fading' practice.
  */
-function performHalfControl() {
+function performPractice(controlOrFading) {
   // todo
+
+  // show experimentwrap
+  showElement('experimentwrap');
+  // for __numPracticeTests
+
+  // hide experimentwrap
+  hideElement('experimentwrap');
 
   // todo at end, call gotonextstage
 }
 
 /**
- * Performs a half-block of fading menu tests.
+ * Performs a half-block of control or fading menu tests.
+ * @param {String} controlOrFading: 'control' or 'fading' practice.
  */
-function performHalfFading() {
+function performHalfBlock(controlOrFading) {
+  // todo
+  // show experimentwrap
+  showElement('experimentwrap');
+  // for __numTests
+
+  // hide experimentwrap
+  hideElement('experimentwrap');
+  // todo at end, call gotonextstage
+}
+
+/**
+ * Brings up a notification with the given message and button.
+ */
+function notify(msg) {
   // todo
 
-  // todo at end, call gotonextstage
+  // todo: when click on btn, hide notification and call gotonextstage
 }
 
 // ---------------------- //
