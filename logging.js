@@ -70,7 +70,8 @@ function logEvent(
   if (ENABLE_CONSOLE_LOGGING) {
     console.log(event.event.target);
     console.log(
-        uid, time, name, targetID, clickNumber, currentTestNum, startOrEndEvent,
+        //  uid,
+        time, name, targetID, clickNumber, currentTestNum, startOrEndEvent,
         wrongItemClick);
   }
   if (ENABLE_NETWORK_LOGGING) {

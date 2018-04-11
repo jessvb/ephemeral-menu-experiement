@@ -20,7 +20,20 @@ let currStage;
 let stageIndex = -1;
 // current trial within the stage
 let currTest = 0;
+// current number of tests we're looking to complete before the next stage
+let currTotalTests = 9999;
 
+// the current correct item
+let currCorrectItem;
+// todo: when user clicks correct item AND we're currently in a practice or
+// block stage (parse for that), then check if currTest < currTotalTests, and
+// either perform another single test or go to the next stage (NOTE: tests are
+// 0-indexed)
+
+// the current test type (either 'control' or 'fading')
+let currTestType;
+// todo: when menu opens, either start the fading process (if currTestType ==
+// 'fading') or don't
 
 // ---------------------------------------- //
 // --- Main Experiment Progress Methods --- //
@@ -45,10 +58,8 @@ function performExperiment(adaptiveAccuracy, isControlFirst) {
 
   // todo put in correct place:
   // get the first correct item
-  let correctItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
+  // let correctItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
   // get predicted items based on this test's adaptiveAccuracy
-  let predictedItems =
-      getPredictedItems(NUM_PREDICTED_ITEMS, correctItem, adaptiveAccuracy);
 }
 
 function goToNextStage() {
@@ -63,7 +74,7 @@ function goToNextStage() {
     case 'notifypractice':
       // show a notification screen telling the user that this is a practice run
       let msg =
-          'In the following stage, you will practice using the system. When you are ready, click "Next".';
+          'In the following stage, you will practice using the system. When you are ready to continue, click "Next".';
       notify(msg);
       break;
     case 'practice1':
@@ -132,10 +143,10 @@ function goToNextStage() {
     case 'block2_survey':
       if (IS_CONTROL_FIRST) {
         // show fading survey
-        showElement('gradualsurveywrap','grid');
+        showElement('gradualsurveywrap', 'grid');
       } else {
         // show control survey
-        showElement('basicsurveywrap','grid');
+        showElement('basicsurveywrap', 'grid');
       }
       break;
     case 'end':
@@ -157,13 +168,17 @@ function goToNextStage() {
  */
 function performPractice(controlOrFading) {
   // todo
-
+  // set current test type as either control or fading
+  currTestType = controlOrFading;
+  // update the number of tests we're performing before the next stage
+  currTotalTests = NUM_PRACTICE_TESTS;
   // show experimentwrap
   showElement('experimentwrap', 'grid');
   // for __numPracticeTests
+  performSingleTest();
 
-  // hide experimentwrap
-  hideElement('experimentwrap');
+  // todo hide experimentwrap at end
+  // hideElement('experimentwrap');
 
   // todo at end, call gotonextstage
 }
@@ -174,12 +189,16 @@ function performPractice(controlOrFading) {
  */
 function performHalfBlock(controlOrFading) {
   // todo
+  // set current test type as either control or fading
+  currTestType = controlOrFading;
+  // update the number of tests we're performing before the next stage
+  currTotalTests = NUM_TESTS_PER_BLOCK / 2;
   // show experimentwrap
   showElement('experimentwrap', 'grid');
   // for __numTests
 
-  // hide experimentwrap
-  hideElement('experimentwrap');
+  // todo hide experimentwrap at end
+  // hideElement('experimentwrap');
   // todo at end, call gotonextstage
 }
 
@@ -237,12 +256,20 @@ function getRandomItem(numBlocks, numItems) {
   let menutitles = document.getElementsByClassName('menutitle');
   // get random menu index:
   let menuIndex = Math.floor(Math.random() * (menutitles.length));
+  // get the associated menu:
+  let menuTitle = menutitles.item(menuIndex);
+  return getRandomItemFromMenu(menuTitle, numBlocks);
+}
+
+/**
+ * Returns a random item from the given menu.
+ */
+function getRandomItemFromMenu(menuTitle, numBlocks) {
   // random block index:
   let blockIndex = Math.floor(Math.random() * (numBlocks));
   // random item index:
   let itemIndex = Math.floor(Math.random() * (numBlocks));
 
-  let menuTitle = menutitles.item(menuIndex);
   let item = menuTitle.getElementsByClassName('menudropdown')[0]
                  .getElementsByClassName('menublock')[blockIndex]
                  .getElementsByClassName('menuitem')[itemIndex];
@@ -360,4 +387,178 @@ function showElement(id, displayType) {
   document.getElementById(id).setAttribute(
       'style', 'display: ' + displayType + ';');
   setSubmitBtn('ans');
+}
+
+/**
+ * Performs a single experiment test by setting various parameters.
+ */
+function performSingleTest() {
+  // get a random menu item and set the prompt
+  currCorrectItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
+  setPrompt(currCorrectItem);
+}
+
+/**
+ * Sets the prompt with the given item.
+ */
+function setPrompt(menuItem) {
+  let itemName = menuItem.innerText;
+  let menuName = 'Menu ' +
+      (menuItem.parentElement.parentElement.parentElement.id).match(/\d+/)[0];
+  let prompt = document.getElementById('promptarea');
+
+  prompt.innerText = menuName + ' > ' + itemName;
+}
+
+/**
+ * Animates the UN-predicted items fading in (based on the given, predicted
+ * items), and once done, removes the animation class from them. Note that this
+ * randomly fades items in other menus too, not just the predicted menu.
+ * @param {HTML elements} predictedItems
+ */
+function fadeItems(predictedItems) {
+  let itemsToFade = getItemsToFade(predictedItems);
+
+  for (let i = 0; i < itemsToFade.length; i++) {
+    itemsToFade[i].setAttribute('class', 'menuitem animFade');
+  }
+  // use afterFade() to remove animFade after the promise is resolved
+  afterFade(itemsToFade).then(function() {
+    removeFade(itemsToFade);
+  });
+}
+
+/**
+ * Removes the fade animation class from the given array of menuitems.
+ */
+function removeFade(menuItems) {
+  for (let i = 0; i < menuItems.length; i++) {
+    menuItems[i].setAttribute('class', 'menuitem');
+  }
+}
+
+/**
+ * Returns unpredicted items based on the predicted items given. This function
+ * returns all the menuitems (in all menus) minus the actually predicted items,
+ * and a couple of 'fake predicted items' in the other menus.
+ */
+function getItemsToFade(predictedItems) {
+  // add some 'fake' predicted items to the predicted items array that are from
+  // the other menus
+
+  // get the menus that weren't predicted
+  let unpredictedMenus = new Array();
+  let allMenus = document.getElementsByClassName('menutitle')
+  for (let i = 0; i < allMenus.length; i++) {
+    let menu = allMenus.item(i);
+    if (menu.id !=
+        predictedItems[0].parentElement.parentElement.parentElement.id) {
+      unpredictedMenus.push(menu);
+    }
+  }
+
+  // add some fake predictions to the predicteditems list from the other menus
+  // for each menu...
+  for (let i = 0; i < unpredictedMenus.length; i++) {
+    let menu = unpredictedMenus[i];
+    let fakeCorrectItem = getRandomItemFromMenu(menu, NUM_BLOCKS);
+    // now "predict" based on this fake correct item
+    let fakePredictions = getPredictedItems(
+        NUM_PREDICTED_ITEMS, fakeCorrectItem, 'low');
+
+    // add each of the fake predictions to the predictedItems list
+    for (let j = 0; j < fakePredictions.length; j++) {
+      predictedItems.push(fakePredictions[j]);
+    }
+  }
+
+  // find the unpredicted items based on the predicted items
+  let unpredicted = new Array();
+  // get all the menu items in the document as an array of items
+  let menuItems =
+      Array.prototype.slice.call(document.getElementsByClassName('menuitem'));
+
+  // loop through all the menu items
+  for (let i = 0; i < menuItems.length; i++) {
+    let isItemPredicted = false;
+    let currItem = menuItems[i];
+    // check against all the predicted items
+    for (let j = 0; j < predictedItems.length; j++) {
+      if (currItem == predictedItems[j]) {
+        isItemPredicted = true;
+        break;
+      }
+    }
+    // if the item isn't predicted, then add to the unpredicted list
+    if (!isItemPredicted) {
+      unpredicted.push(currItem);
+    }
+  }
+  return unpredicted;
+}
+
+/**
+ * TODO DEL
+ * Returns the UNpredicted items based on the predicted items. This function
+ * returns ONLY the menuitems that are in the same menu as the predicted items.
+ */
+// function getUnpredictedItems(predictedItems) {
+//   // find the unpredicted items based on the predicted items
+//   let unpredicted = new Array();
+//   let itemsInMenu =
+//       predictedItems[0].parentElement.parentElement.getElementsByClassName(
+//           'menuitem');
+//   // loop through all the menu items
+//   for (let i = 0; i < itemsInMenu.length; i++) {
+//     let isItemPredicted = false;
+//     let currItem = itemsInMenu[i];
+//     // check against all the predicted items
+//     for (let j = 0; j < predictedItems.length; j++) {
+//       if (currItem == predictedItems[j]) {
+//         isItemPredicted = true;
+//         break;
+//       }
+//     }
+//     // if the item isn't predicted, then add to the unpredicted list
+//     if (!isItemPredicted) {
+//       unpredicted.push(currItem);
+//     }
+//   }
+//   return unpredicted;
+// }
+
+/**
+ * Get fake predicted items for the other menus
+ */
+
+/**
+ * Returns a promise that is resolved after the unpredicted items have completed
+ * fading in.
+ * @param unpredictedItems
+ */
+function afterFade(unpredictedItems) {
+  let arr = new Array();
+  for (let i = 0; i < unpredictedItems.length; i++) {
+    arr.push(afterAnimation(unpredictedItems[i], 'keyFade'))
+  }
+  return Promise.all(arr);
+}
+
+/**
+ * NOTE: This method comes from MIT's 6.831 Candy Crush Assignment.
+ *
+ * Return a promise that is resolved after all animations of a given name
+ * have stopped on one or more elements.
+ * Caveat: The animations need to be *already* applied when this is called.
+ * @param target {Element|Array<Element>}
+ * @param animationName {String}
+ */
+function afterAnimation(target, animationName) {
+  target = Array.isArray(target) ? target : [target];
+  var animating = target.filter(
+      candy => getComputedStyle(candy).animationName.includes(animationName));
+
+  return Promise.all(animating.map(
+      el => Util.when(
+          el, 'animationend', evt => evt.animationName == animationName)));
 }

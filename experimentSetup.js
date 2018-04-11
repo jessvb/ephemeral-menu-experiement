@@ -9,9 +9,9 @@ Math.seedrandom(0);
 // ------------------------------ //
 // userID for this particular experiment (assoc w survey too):
 let userID = localStorage.getItem('userID');
-// increment currentTestNum before every test:
-let currentTestNum = 0;
-// if the click starts a test, then put 'start', if it ends, put 'end':
+// increment currentTestNum before every test: see currTest in
+// experimentProcess.js if the click starts a test, then put 'start', if it
+// ends, put 'end':
 let startOrEndEvent = 'start';
 // if this click was on an incorrect menu item, make this true:
 let wrongItemClick = true;
@@ -29,6 +29,10 @@ const NUM_PREDICTED_ITEMS = 3;
 // --- On Startup --- //
 // ------------------ //
 document.addEventListener('DOMContentLoaded', function(event) {
+  // ------------------------ //
+  // --- Experiment Setup --- //
+  // ------------------------ //
+
   // Create menus with NUMBLOCKS subsections each and NUMITEMS items within each
   // subsection
   createMenus(NUM_BLOCKS, NUM_ITEMS);
@@ -42,60 +46,93 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // randomly assigned
   const isControlFirst = getOrderOfControl();
 
-  // Start the experiment
+  // ----------------------- //
+  // --- Event Listeners --- //
+  // ----------------------- //
+  document.getElementById('menuarea')
+      .addEventListener('mousedown', function(evt) {
+        // send information to the Google Form
+        document.dispatchEvent(new CustomEvent('log', {
+          // todo: update wrongItemClick and startOrEndEvent here (i.e., check
+          // against currCorrectItem -> end event, and the current menu -> start
+          // event)
+          detail: {
+            userID: userID,
+            event: evt,
+            customName: null,  // if customName is set, it overwrites the name
+            clickNumber: clickNumber++,
+            currentTestNum: currTest,
+            startOrEndEvent: startOrEndEvent,
+            wrongItemClick: wrongItemClick
+            // todo add: currTestType, adaptiveAccuracy, currStage, currTestNum
+          }
+        }));
+
+        // --- MENU OPENING AND CLOSING -- //
+        // remove the fading animation from all menuitems before re-applying any
+        // animations
+        let arrItems = Array.prototype.slice.call(
+            document.getElementsByClassName('menuitem'));
+        removeFade(arrItems);
+
+        let targ = evt.target;
+        // if this was a menutitle, open the menu
+        if (classIncludes('menutitle', targ)) {
+          let menudropdown = targ.getElementsByClassName('menudropdown')[0];
+
+          // start the fading process if we're currently in a fading stage (not
+          // control)
+          if (currTestType == 'fading') {
+            // predict items
+            let predictedItems = getPredictedItems(
+                NUM_PREDICTED_ITEMS, currCorrectItem, adaptiveAccuracy);
+            // animate the unpredicted items fading in
+            fadeItems(predictedItems);
+          }
+
+          // stop showing the other menus
+          let menus = document.getElementsByClassName('menutitle');
+          for (let i = 0; i < menus.length; i++) {
+            let menu = menus.item(i).getElementsByClassName('menudropdown')[0];
+            // check if not the same id as the one we clicked on:
+            if (menu.parentElement.id != menudropdown.parentElement.id) {
+              // hide menu
+              menu.setAttribute('class', 'menudropdown');
+              // revert the menutitle's colour to normal
+              menu.parentElement.setAttribute('class', 'menutitle');
+            } else {
+              // this is the menu we clicked on
+              // Toggle this menu between shown and not shown:
+              toggleShowMenu(menudropdown);
+            }
+          }
+        } else {
+          // the user clicked on something that wasn't a menu, so hide all menus
+          hideAllMenus();
+        }
+        // todo: if this was a menuitem, check if it was the correct item. If it
+        // was correct, increment the currTest value and check against
+        // currTotalTests
+      });
+
+
+  // Start the experiment -- see experimentProcess.js
   performExperiment(adaptiveAccuracy, isControlFirst);
-});
-
-// ----------------------- //
-// --- Event Listeners --- //
-// ----------------------- //
-document.addEventListener('mousedown', function(evt) {
-  // send information to the Google Form
-  document.dispatchEvent(new CustomEvent('log', {
-    detail: {
-      userID: userID,
-      event: evt,
-      customName: null,  // if customName is set, it overwrites the name
-      clickNumber: clickNumber++,
-      currentTestNum: currentTestNum,
-      startOrEndEvent: startOrEndEvent,
-      wrongItemClick: wrongItemClick
-    }
-  }));
-
-  let targ = evt.target;
-  // if this was a menutitle, open the menu
-  if (targ != null && targ.getAttribute('class') != null &&
-      targ.getAttribute('class').includes('menutitle')) {
-    let menudropdown = targ.getElementsByClassName('menudropdown')[0];
-
-    // stop showing the other menus
-    let menus = document.getElementsByClassName('menutitle');
-    for (let i = 0; i < menus.length; i++) {
-      let menu = menus.item(i).getElementsByClassName('menudropdown')[0];
-      // check if not the same id as the one we clicked on:
-      if (menu.parentElement.id != menudropdown.parentElement.id) {
-        // hide menu
-        menu.setAttribute('class', 'menudropdown');
-        // revert the menutitle's colour to normal
-        menu.parentElement.setAttribute('class', 'menutitle');
-      } else {
-        // this is the menu we clicked on
-        // Toggle this menu between shown and not shown:
-        toggleShowMenu(menudropdown);
-      }
-    }
-  } else {
-    // the user clicked on something that wasn't a menu, so hide all menus
-    hideAllMenus();
-  }
-  // if this was a menuitem, check if it was the correct item
 });
 
 
 // ---------------------- //
 // --- Helper Methods --- //
 // ---------------------- //
+
+/**
+ * Checks if the target's class includes the given className. Does null checking
+ * too.
+ */
+function classIncludes(className, target) {
+  return target != null && target.getAttribute('class') != null &&
+      target.getAttribute('class').includes(className);
+}
 
 /**
  * Create menus wherever 'menutitle's are placed in the HTML document. Each menu
