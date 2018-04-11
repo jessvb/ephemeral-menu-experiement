@@ -13,10 +13,11 @@ const NUM_TESTS_PER_BLOCK = 126;
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;
-// number of
 
 // current stage of the experiment
 let currStage;
+// current index of the experiment stage
+let stageIndex = -1;
 // current trial within the stage
 let currTest = 0;
 
@@ -33,13 +34,14 @@ function performExperiment(adaptiveAccuracy, isControlFirst) {
   IS_CONTROL_FIRST = isControlFirst;
 
   // stop showing the elements, if they are shown
-  // hideElement('experimentwrap');
+  hideElement('experimentwrap');
   hideElement('basicsurveywrap');
   hideElement('gradualsurveywrap');
+  hideElement('notificationwrap');
 
   // Do the experiment in order of the stages.
-  let stageIndex = -1;
-  goToNextStage(stageIndex);
+  stageIndex = -1;
+  goToNextStage();
 
   // todo put in correct place:
   // get the first correct item
@@ -49,7 +51,7 @@ function performExperiment(adaptiveAccuracy, isControlFirst) {
       getPredictedItems(NUM_PREDICTED_ITEMS, correctItem, adaptiveAccuracy);
 }
 
-function goToNextStage(stageIndex) {
+function goToNextStage() {
   // increment the stage index
   stageIndex++;
   // get name of current stage
@@ -61,7 +63,7 @@ function goToNextStage(stageIndex) {
     case 'notifypractice':
       // show a notification screen telling the user that this is a practice run
       let msg =
-          'The next stage is for you to practice using the system. When you are ready, click "Next".';
+          'In the next stage, you will practice using the system. When you are ready, click "Next".';
       notify(msg);
       break;
     case 'practice1':
@@ -98,10 +100,10 @@ function goToNextStage(stageIndex) {
       if (IS_CONTROL_FIRST) {
         // TODO: add gotonextstage in the submit buttons for the
         // conditionsurveys show control survey
-        showElement('basicsurveywrap');
+        showElement('basicsurveywrap', 'grid');
       } else {
         // show gradual survey
-        showElement('gradualsurveywrap');
+        showElement('gradualsurveywrap', 'grid');
       }
       break;
     case 'block2_half1':
@@ -130,10 +132,10 @@ function goToNextStage(stageIndex) {
     case 'block2_survey':
       if (IS_CONTROL_FIRST) {
         // show fading survey
-        showElement('gradualsurveywrap');
+        showElement('gradualsurveywrap','grid');
       } else {
         // show control survey
-        showElement('basicsurveywrap');
+        showElement('basicsurveywrap','grid');
       }
       break;
     case 'end':
@@ -157,7 +159,7 @@ function performPractice(controlOrFading) {
   // todo
 
   // show experimentwrap
-  showElement('experimentwrap');
+  showElement('experimentwrap', 'grid');
   // for __numPracticeTests
 
   // hide experimentwrap
@@ -173,21 +175,12 @@ function performPractice(controlOrFading) {
 function performHalfBlock(controlOrFading) {
   // todo
   // show experimentwrap
-  showElement('experimentwrap');
+  showElement('experimentwrap', 'grid');
   // for __numTests
 
   // hide experimentwrap
   hideElement('experimentwrap');
   // todo at end, call gotonextstage
-}
-
-/**
- * Brings up a notification with the given message and button.
- */
-function notify(msg) {
-  // todo
-
-  // todo: when click on btn, hide notification and call gotonextstage
 }
 
 // ---------------------- //

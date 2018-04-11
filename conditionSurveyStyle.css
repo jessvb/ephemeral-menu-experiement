@@ -1,6 +1,9 @@
 /* CSS specific to the closing survey */
 
 .survey {
+    /* variables */
+    --likert-margin: 0.75em;
+    /* survey notes */
     display: grid;
     grid-template-columns: auto 60%;
     grid-column-gap: 1em;
@@ -15,10 +18,14 @@
     font-weight: bold;
 }
 
+.margined {
+    margin-top: var(--likert-margin);
+}
+
 .ans {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 0.75em;
+    margin-top: var(--likert-margin);
 }
 
 label {

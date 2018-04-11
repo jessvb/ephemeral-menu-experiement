@@ -8,7 +8,7 @@ Math.seedrandom(0);
 // --- Variables to be logged --- //
 // ------------------------------ //
 // userID for this particular experiment (assoc w survey too):
-let userID = localStorage.getItem("userID");
+let userID = localStorage.getItem('userID');
 // increment currentTestNum before every test:
 let currentTestNum = 0;
 // if the click starts a test, then put 'start', if it ends, put 'end':
@@ -35,17 +35,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
   updateMenus(NUM_BLOCKS, NUM_ITEMS);
 
   // The accuracy is randomly chosen on a per-subject basis to be either high or
-  // low
+  // low (between subjects)
   const adaptiveAccuracy = getAccuracy();
 
-  // Whether the control or the fading menu tests are first depends on whether
-  // the user id is odd or even (every second user sees the fading menu tests
-  // first). I.e., control vs long-onset: within-subjects, fully counterbalanced
-  // TODO: is this correct?? or should it just be random?
-  let isControlFirst = true;
-  if (userID % 2 == 0) {
-    isControlFirst = false;
-  }
+  // Whether the control or the fading menu tests are first (within subjects) is
+  // randomly assigned
+  const isControlFirst = getOrderOfControl();
 
   // Start the experiment
   performExperiment(adaptiveAccuracy, isControlFirst);
@@ -176,4 +171,16 @@ function getAccuracy() {
     acc = 'low';
   }
   return acc;
+}
+
+/**
+ * Randomly return true or false for the order of control. There is a 50% chance
+ * of randomly getting true.
+ */
+function getOrderOfControl() {
+  let controlFirst = true;
+  if (Math.random() < 0.5) {
+    controlFirst = false;
+  }
+  return controlFirst;
 }
