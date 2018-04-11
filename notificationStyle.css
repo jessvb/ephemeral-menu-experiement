@@ -1,2 +1,27 @@
 /* This file contains the style for the notifications that pop up during the experiment */
 
+#notificationwrap {
+    /* Variables */
+    --notif-margin: 3rem;
+    --notif-padding: 1rem;
+    --gap: 0.5rem;
+    --max-width: 50em;
+    /* Style */
+    display: grid;
+    margin: var(--notif-margin);
+    padding: var(--notif-padding);
+    grid-row-gap: var(--gap);
+    border: thick solid var(--colour-outer-outline);
+    background-color: var(--colour-background);
+    color: var(--colour-menu-font);
+    text-align: center;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button.next {
+    color: var(--colour-background);
+    background-color: var(--colour-outer-outline);
+}
+

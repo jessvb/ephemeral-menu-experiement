@@ -63,7 +63,7 @@ function goToNextStage() {
     case 'notifypractice':
       // show a notification screen telling the user that this is a practice run
       let msg =
-          'In the next stage, you will practice using the system. When you are ready, click "Next".';
+          'In the following stage, you will practice using the system. When you are ready, click "Next".';
       notify(msg);
       break;
     case 'practice1':

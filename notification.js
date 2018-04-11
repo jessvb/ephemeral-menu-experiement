@@ -1,5 +1,3 @@
-// TODO: MAKE A NICE STYLE FOR THE NOTIFICATION.
-
 // once the DOM has finished loading, do stuff:
 document.addEventListener('DOMContentLoaded', function(event) {
   let btns = document.getElementsByClassName('next');
