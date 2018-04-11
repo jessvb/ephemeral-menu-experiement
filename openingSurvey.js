@@ -1,5 +1,5 @@
 // Get the user id as specified by the url parameter:
-let userID = localStorage.getItem("userID");
+let userID = localStorage.getItem('userID');
 // Make the url for the next page with the given userID:
 let url = 'gradualOnsetExperiment.html?userID=' + userID;
 
@@ -18,7 +18,8 @@ function submitAndGo() {
   sex = document.getElementById('sex').value;
   computerUsage = document.getElementById('compUsage').value;
   email = document.getElementById('email').value;
-  if (userID == null || age == null || sex == null || computerUsage == null || email == null) {
+  if (userID == null || age == null || sex == null || computerUsage == null ||
+      email == null) {
     console.error(
         'There is an unanswered question. Please report this error to the experimenter.');
     console.error('Collected answers:', userID, age, sex, computerUsage, email);
@@ -31,6 +32,8 @@ function submitAndGo() {
   }
 }
 
+// The following function was made with: curl -sL goo.gl/jUkahv | python2 -
+// https://docs.google.com/forms/d/1f9qtQD0-huSpA0mMTRioZ8TgjR_oq1qBgnGWXmXO8ds/edit
 
 // Opening Survey submission function
 // submits to the google form at this URL:

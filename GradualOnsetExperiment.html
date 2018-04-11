@@ -13,6 +13,7 @@
     <!-- Load style sheets -->
     <link rel="stylesheet" href="generalStyle.css">
     <link rel="stylesheet" href="experimentStyle.css">
+    <link rel="stylesheet" href="conditionSurveyStyle.css">
 
     <!-- Load any supplemental Javascript libraries here -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js"></script>
@@ -23,6 +24,8 @@
     <script src="listOfThings.js"></script>
     <script src="util.js"></script>
     <script src="logging.js"></script>
+    <script src="survey.js"></script>
+    <script src="conditionSurvey.js"></script>
 </head>
 
 <body>
@@ -39,6 +42,60 @@
             </div>
         </div>
         <div id="bottomtext"></div>
+    </div>
+
+    <div id="basicsurveywrap">
+        <div id="titleArea">
+            <h1>Gradual Onset Menu Experiment</h1>
+        </div>
+        <div id="infoArea">
+            <h2>Short Survey</h2>
+            <div class="survey">
+                <div class="likertDef">
+                    <div>todo likert less</div>
+                    <div>Neutral</div>
+                    <div>todo likert more</div>
+                </div>
+                <div class="ques">todo Likert scale question 5...</div>
+                <div class="ans likert basic" id='basiclikert1'></div>
+                <div class="ques">todo Likert scale question 6...</div>
+                <div class="ans likert basic" id='basiclikert2'></div>
+                <div class="ques">todo Likert scale question 7...</div>
+                <div class="ans likert basic" id='basiclikert3'></div>
+                <div class="ques">todo Likert scale question 8...</div>
+                <div class="ans likert basic" id='basiclikert4'></div>
+            </div>
+        </div>
+        <div id="buttonArea">
+            <input type="button" class="button submit" value="Submit">
+        </div>
+    </div>
+
+    <div id="gradualsurveywrap">
+        <div id="titleArea">
+            <h1>Gradual Onset Menu Experiment</h1>
+        </div>
+        <div id="infoArea">
+            <h2>Short Survey</h2>
+            <div class="survey">
+                <div class="likertDef">
+                    <div>todo likert less</div>
+                    <div>Neutral</div>
+                    <div>todo likert more</div>
+                </div>
+                <div class="ques">todo Likert scale question 1...</div>
+                <div class="ans likert gradual" id='graduallikert1'></div>
+                <div class="ques">todo Likert scale question 2...</div>
+                <div class="ans likert gradual" id='graduallikert2'></div>
+                <div class="ques">todo Likert scale question 3...</div>
+                <div class="ans likert gradual" id='graduallikert3'></div>
+                <div class="ques">todo Likert scale question 4...</div>
+                <div class="ans likert gradual" id='graduallikert4'></div>
+            </div>
+        </div>
+        <div id="buttonArea">
+            <input type="button" class="button submit" value="Submit">
+        </div>
     </div>
 
 </body>

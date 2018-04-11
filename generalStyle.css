@@ -37,7 +37,9 @@ h2 {
     margin-top: 2em;
 }
 
-#wholeSiteWrap {
+#wholeSiteWrap,
+#basicsurveywrap,
+#gradualsurveywrap {
     box-sizing: border-box;
     padding: var(--site-padding-size);
     height: 100%;

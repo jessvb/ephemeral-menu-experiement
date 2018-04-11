@@ -4,42 +4,108 @@
 
 // stages in the experiment
 const STAGES = [
-  'bgSurvey', 'practice', 'block1_half1', 'shortBreak1', 'block1_half2',
-  'block1_survey', 'block2_half1', 'shortBreak2', 'block2_half2',
-  'block2_survey'
+  'practice', 'block1_half1', 'shortBreak1', 'block1_half2', 'block1_survey',
+  'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end'
 ];
 
+// whether control or fading menus is first
+let IS_CONTROL_FIRST;
+// number of 
+
 // current stage of the experiment
-let currStage = STAGES[0];
+let currStage;
 // current trial within the stage
 let currTest = 0;
 
 
-// ------------------- //
-// --- Main Method --- //
-// ------------------- //
+// ---------------------------------------- //
+// --- Main Experiment Progress Methods --- //
+// ---------------------------------------- //
 
 /**
  * This method starts and completes the process of the experiment. It runs
  * through all the stages of the experiment.
  */
 function performExperiment(adaptiveAccuracy, isControlFirst) {
+  IS_CONTROL_FIRST = isControlFirst;
+
+  // stop showing the elements, if they are shown
+  // hideElement('experimentwrap');
+  hideElement('basicsurveywrap');
+  hideElement('gradualsurveywrap');
+
   // Do the experiment in order of the stages.
-  let stageIndex = 0;
+  let stageIndex = -1;
+  goToNextStage(stageIndex);
 
-  while (stageIndex < STAGES.length) {
-    currStage = STAGES[stageIndex];
-    console.log('currstage:', currStage);
-    // todo - switch statement for stages
-    stageIndex++;
-  }
-
-
+  // todo put in correct place:
   // get the first correct item
   let correctItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
   // get predicted items based on this test's adaptiveAccuracy
   let predictedItems =
       getPredictedItems(NUM_PREDICTED_ITEMS, correctItem, adaptiveAccuracy);
+}
+
+function goToNextStage(stageIndex) {
+  // increment the stage index
+  stageIndex++;
+  // get name of current stage
+  currStage = STAGES[stageIndex];
+
+  // Do different things, depending on the stage:
+  switch (currStage) {
+    case 'practice':
+      // show a notification screen telling the user that this is a practice run
+      break;
+    case 'block1_half1':
+      if (IS_CONTROL_FIRST) {
+        performHalfControl();
+      } else {
+        performHalfFading();
+      }
+      break;
+    case 'shortBreak1':
+
+      break;
+    case 'block1_half2':
+      break;
+
+    case 'block1_survey':
+      break;
+    case 'block2_half1':
+      break;
+    case 'shortBreak2':
+      break;
+    case 'block2_half2':
+      break;
+    case 'block2_survey':
+      break;
+    case 'end':
+      break;
+    default:
+      console.error(
+          'The stage, ' + currStage +
+          ', is unknown. No code has been written for this stage.');
+      break;
+  }
+}
+
+/**
+ * Performs a half-block of control menu tests.
+ */
+function performHalfControl() {
+  // todo
+
+  // todo at end, call gotonextstage
+}
+
+/**
+ * Performs a half-block of fading menu tests.
+ */
+function performHalfFading() {
+  // todo
+
+  // todo at end, call gotonextstage
 }
 
 // ---------------------- //
@@ -218,4 +284,5 @@ function hideElement(id) {
 function showElement(id, displayType) {
   document.getElementById(id).setAttribute(
       'style', 'display: ' + displayType + ';');
+  setSubmitBtn('ans');
 }
