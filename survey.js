@@ -1,6 +1,6 @@
+// This file contains methods to control all of the surveys during the experiment
 
-
-// once the DOM has finished loading, do stuff:
+// Once the DOM has finished loading, do stuff:
 document.addEventListener('DOMContentLoaded', function(event) {
   // if there are Likert scale questions, generate the scale using javascript
   let likerts = document.getElementsByClassName('likert');

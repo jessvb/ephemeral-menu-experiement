@@ -13,8 +13,8 @@
  */
 function submitAndGo() {
   // Check if we're in the control or the gradual survey stage
-  if ((currStage == 'block1survey' && IS_CONTROL_FIRST) ||
-      (currStage == 'block2survey' && !IS_CONTROL_FIRST)) {
+  if ((currStage == 'block1_survey' && IS_CONTROL_FIRST) ||
+      (currStage == 'block2_survey' && !IS_CONTROL_FIRST)) {
     // we're in the control survey, so submit to the basic likert survey form
     let basiclikert1, basiclikert2, basiclikert3, basiclikert4;
     basiclikert1 = getSelectedRadio('basiclikert1');
@@ -34,11 +34,14 @@ function submitAndGo() {
       // send input
       sendBasicLikertSurvey(
           userID, basiclikert1, basiclikert2, basiclikert3, basiclikert4);
+      // hide survey and go to the next stage
+      hideElement('basicsurveywrap');
+      goToNextStage();
     }
 
   } else if (
-      (currStage == 'block1survey' && !IS_CONTROL_FIRST) ||
-      (currStage == 'block2survey' && IS_CONTROL_FIRST)) {
+      (currStage == 'block1_survey' && !IS_CONTROL_FIRST) ||
+      (currStage == 'block2_survey' && IS_CONTROL_FIRST)) {
     // we're in the fading survey, so submit to the gradual likert survey form
     let graduallikert1, graduallikert2, graduallikert3, graduallikert4;
     // get user input
@@ -60,18 +63,21 @@ function submitAndGo() {
       sendGradualLikertSurvey(
           userID, graduallikert1, graduallikert2, graduallikert3,
           graduallikert4);
+      // hide survey and go to the next stage
+      hideElement('gradualsurveywrap');
+      goToNextStage();
     }
   } else {
     console.error(
         'The current stage is unknown. Results were not submitted to Google Forms.');
-    let graduallikert1 = getSelectedRadio('likertQ1');
-    let graduallikert2 = getSelectedRadio('likertQ2');
-    let graduallikert3 = getSelectedRadio('likertQ3');
-    let graduallikert4 = getSelectedRadio('likertQ4');
-    let basiclikert1 = getSelectedRadio('likertQ5');
-    let basiclikert2 = getSelectedRadio('likertQ6');
-    let basiclikert3 = getSelectedRadio('likertQ7');
-    let basiclikert4 = getSelectedRadio('likertQ8');
+    let graduallikert1 = getSelectedRadio('graduallikert1');
+    let graduallikert2 = getSelectedRadio('graduallikert2');
+    let graduallikert3 = getSelectedRadio('graduallikert3');
+    let graduallikert4 = getSelectedRadio('graduallikert4');
+    let basiclikert1 = getSelectedRadio('basiclikert1');
+    let basiclikert2 = getSelectedRadio('basiclikert2');
+    let basiclikert3 = getSelectedRadio('basiclikert3');
+    let basiclikert4 = getSelectedRadio('basiclikert4');
     console.error(
         userID, basiclikert1, basiclikert2, basiclikert3, basiclikert4,
         graduallikert1, graduallikert2, graduallikert3, graduallikert4);
