@@ -26,8 +26,10 @@ function initLoggingEvents() {
     'log': function(evt) {
       var detail = evt.detail;
       logEvent(
-          detail, detail.customName, detail.clickNumber, detail.currentTestNum,
-          detail.startOrEndEvent, detail.wrongItemClick);
+          detail, detail.userID, detail.customName, detail.clickNumber,
+          detail.currentTestNum, detail.startOrEndEvent, detail.wrongItemClick,
+          detail.currTestType, detail.adaptiveAccuracy, detail.currStage,
+          detail.currTestNum, detail.currCorrectItem);
     }
   });
   // Listen to 'log' events which are triggered anywhere in the document.
@@ -62,23 +64,26 @@ function getUniqueId() {
 
 // Log the given event.
 function logEvent(
-    event, customName, clickNumber, currentTestNum, startOrEndEvent,
-    wrongItemClick) {
+    event, userid, customname, clicknumber, currenttestnum, startorendevent,
+    wrongitemclick, currtesttype, adaptiveaccuracy, currstage, currtestnum,
+    currcorrectitem) {
   var time = (new Date).getTime();
-  var name = customName || event.event.type;
-  var targetID = event.event.target.id || event.event.target.className;
+  var name = customname || event.event.type;
+  var targetid = event.event.target.id || event.event.target.className;
 
   if (ENABLE_CONSOLE_LOGGING) {
     console.log(event.event.target);
     console.log(
         //  uid,
-        time, name, targetID, clickNumber, currentTestNum, startOrEndEvent,
-        wrongItemClick);
+        userid, time, name, targetid, clicknumber, currenttestnum,
+        startorendevent, wrongitemclick, currtesttype, adaptiveaccuracy,
+        currstage, currtestnum, currcorrectitem);
   }
   if (ENABLE_NETWORK_LOGGING) {
     sendNetworkLog(
-        userID, uid, time, name, targetID, clickNumber, currentTestNum,
-        startOrEndEvent, wrongItemClick);
+        userID, uid, time, name, targetid, clicknumber, currenttestnum,
+        startorendevent, wrongitemclick, currtesttype, adaptiveaccuracy,
+        currstage, currtestnum, currcorrectitem);
   }
 }
 
@@ -133,13 +138,13 @@ if (ENABLE_NETWORK_LOGGING) {
 // wrongItemClick: true/false depending on if the click was on a wrong menu item
 
 
-
 // Network Log submission function
 // submits to the google form at this URL:
 // docs.google.com/forms/d/1-ZRb7ZPCF3yIGvW5PqgEBVcuw3OSHMujjOfk3IkS-_U/edit
 function sendNetworkLog(
     userid, uid, time, name, targetid, clicknumber, currenttestnum,
-    startorendevent, wrongitemclick) {
+    startorendevent, wrongitemclick, currtesttype, adaptiveaccuracy, currstage,
+    currtestnum, currcorrectitem) {
   var formid = 'e/1FAIpQLSf9mT5037w8mgBtlR3bX6SWqanROdM8bnwWuYktgSM6C1Wg_Q';
   var data = {
     'entry.1165309888': userid,
@@ -150,7 +155,12 @@ function sendNetworkLog(
     'entry.1832629466': clicknumber,
     'entry.704587025': currenttestnum,
     'entry.803438567': startorendevent,
-    'entry.500568131': wrongitemclick
+    'entry.500568131': wrongitemclick,
+    'entry.2122987508': currtesttype,
+    'entry.137766135': adaptiveaccuracy,
+    'entry.2135236622': currstage,
+    'entry.77254403': currtestnum,
+    'entry.614469801': currcorrectitem
   };
   var params = [];
   for (key in data) {

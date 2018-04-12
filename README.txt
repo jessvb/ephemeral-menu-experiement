@@ -7,7 +7,6 @@ List of the people I discussed this assignment with:
 - Geeticka Chauhan
 - Felix Naser
 - Vaikkunth Mugunthan
-- todo
 
 URL of my YouTube/Vimeo screencast:
 todo

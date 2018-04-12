@@ -1,10 +1,6 @@
 // This javascript file contains methods to set up the experiment, and calls
 // functions in experimentProcess to begin the experiment
 
-// TODO del:
-// For simpler testing, always use the same seed:
-// Math.seedrandom(0);
-
 // ------------------------------ //
 // --- Variables to be logged --- //
 // ------------------------------ //
@@ -26,6 +22,12 @@ const NUM_ITEMS = 4;
 // number of predicted items:
 const NUM_PREDICTED_ITEMS = 3;
 
+// the current type of test fading/ephemeral or basic/control
+// let currTestType = currTestType;
+// let adaptiveAccuracy = adaptiveAccuracy;
+// let currStage = currStage;
+// let currTest = currTest;
+
 // ------------------ //
 // --- On Startup --- //
 // ------------------ //
@@ -41,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   // The accuracy is randomly chosen on a per-subject basis to be either high or
   // low (between subjects)
-  const adaptiveAccuracy = getAccuracy();
+  adaptiveAccuracy = getAccuracy();
 
   // Whether the control or the fading menu tests are first (within subjects) is
   // randomly assigned
-  const isControlFirst = getOrderOfControl();
+  isControlFirst = getOrderOfControl();
 
   // ----------------------- //
   // --- Event Listeners --- //
@@ -138,10 +140,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         // log only if the current stage contains 'block'
         if (currStage.includes('block')) {
           document.dispatchEvent(new CustomEvent('log', {
-            // todo: update wrongItemClick and startOrEndEvent here (i.e., check
-            // against currCorrectItem -> end event, and the current menu ->
-            // start
-            // event)
             detail: {
               userID: userID,
               event: evt,
@@ -149,15 +147,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
               clickNumber: clickNumber++,
               currentTestNum: currTest,
               startOrEndEvent: startOrEndEvent,
-              wrongItemClick: wrongItemClick
-              // todo add: currTestType, adaptiveAccuracy, currStage,
-              // currTestNum
+              wrongItemClick: wrongItemClick,
+              currTestType: currTestType,
+              adaptiveAccuracy: adaptiveAccuracy,
+              currStage: currStage,
+              currTestNum: currTest,
+              currCorrectItem: currCorrectItem.innerHTML
             }
           }));
         }
 
         // --- Go to next test or go to next stage --- //
-        // todo: check this!!
         if (nextStage) {
           // close all the menus
           hideAllMenus();

@@ -1,5 +1,3 @@
-// TODO: MAKE SPECIFIC TO THE FADING/CONTROL SURVEYS
-
 // Make the url for the next page with the given userID:
 // let url = 'closingPage.html?userID=' + userID;
 

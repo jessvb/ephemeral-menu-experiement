@@ -1,5 +1,3 @@
-// TODO: CHANGE TO JUST HAVE THE COMPARISON Q SENT!
-
 // Get the user id as specified by the url parameter:
 let userID = localStorage.getItem("userID");
 // Make the url for the next page with the given userID:

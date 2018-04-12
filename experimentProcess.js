@@ -1,5 +1,4 @@
-// TODO: ADD A COUPLE THINGS IN LOGGING... SEE EXPERIMENTSETUP.JS TODO
-// TODO: TEST THE RESULTS FROM THE CLICKING IN THE GOOGLE FORMS 
+// TODO: TEST THE RESULTS FROM THE CLICKING IN THE GOOGLE FORMS
 
 // TODO: CREATE PAGE WHERE YOU CAN CHANGE THE NUM_TESTS_PER_BLOCK AND
 // NUM_PRACTICE_TESTS
@@ -35,8 +34,8 @@ let currTotalTests = 9999;
 
 // the current correct item
 let currCorrectItem;
-// todo: when user clicks correct item AND we're currently in a practice or
-// block stage (parse for that), then check if currTest < currTotalTests, and
+// Note: when user clicks correct item^^ AND we're currently in a practice or
+// block stage, then check if currTest < currTotalTests, and
 // either perform another single test or go to the next stage (NOTE: tests are
 // 0-indexed)
 
@@ -99,7 +98,8 @@ function goToNextStage() {
     case 'notifyblock':
       // show a notification screen telling the user that this is the real
       // experiment
-      msg = 'In the following stage, you will use the system similarly to how you just used it in the practice stage. When you are ready to continue, click "Next".';
+      msg =
+          'In the following stage, you will use the system similarly to how you just used it in the practice stage. When you are ready to continue, click "Next".';
       notify(msg);
       break;
     case 'block1_half1':
