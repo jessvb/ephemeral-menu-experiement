@@ -86,6 +86,20 @@ function goToNextStage() {
   updateProgressBar();
 
   // Do different things, depending on the stage:
+  if (!currStage.includes('notify') && !currStage.includes('survey') &&
+      (currStage.includes('block') || currStage.includes('practice'))) {
+        console.log('IT DID IT!!!!!!!!!!!!!!!!', 'currStage:', currStage);
+    // create the random sequence of items if it hasn't been created:
+    if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+      [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+          getRandItemMenuSeqs();
+    }
+
+    // update the menu items to mask the sequence
+    updateMenus();
+  }
+
+  // Switch for each stage:
   let msg = '';
   switch (currStage) {
     case 'notifypractice':
@@ -95,12 +109,6 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'practice1':
-      // create the random sequence of items
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
-
       // go to the practice sequence
       if (IS_CONTROL_FIRST) {
         performPractice('control');
@@ -116,12 +124,6 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block1_half1':
-      // create the random sequence of items if we haven't yet
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
-
       // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 1st half of control
@@ -137,12 +139,6 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block1_half2':
-      // make sure we've made the random sequence already
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
-
       // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 2nd half of control
@@ -163,11 +159,6 @@ function goToNextStage() {
       }
       break;
     case 'practice2':
-      // create the random sequence of items if we haven't yet
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
       // perform the practice run
       if (IS_CONTROL_FIRST) {
         performPractice('fading');
@@ -176,12 +167,6 @@ function goToNextStage() {
       }
       break;
     case 'block2_half1':
-      // make sure we've made the random sequence already
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
-
       // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 1st half of fading
@@ -197,12 +182,6 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block2_half2':
-      // make sure we've made the random sequence already
-      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
-        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
-            getRandItemMenuSeqs();
-      }
-
       // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 2nd half of fading
@@ -288,8 +267,8 @@ function performHalfBlock(controlOrFading) {
  * Update the items in the menus (e.g., when the user moves to a new block)
  */
 function updateMenus() {
-   // number of blocks per menu:
-   let numBlocks = document.getElementById('menu1')
+  // number of blocks per menu:
+  let numBlocks = document.getElementById('menu1')
                       .getElementsByClassName('menublock')
                       .length;
   // number of items per block:
