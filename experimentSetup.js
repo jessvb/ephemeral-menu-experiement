@@ -22,12 +22,6 @@ const NUM_ITEMS = 4;
 // number of predicted items:
 const NUM_PREDICTED_ITEMS = 3;
 
-// the current type of test fading/ephemeral or basic/control
-// let currTestType = currTestType;
-// let adaptiveAccuracy = adaptiveAccuracy;
-// let currStage = currStage;
-// let currTest = currTest;
-
 // ------------------ //
 // --- On Startup --- //
 // ------------------ //

@@ -88,8 +88,20 @@ The data collected for each trial run is as follows, and is collected every time
 - currStage: the current stage the user is in (e.g., 'block1_half1', 'block2_half1', etc.)
 - currCorrectItem: the name of the current item that the user should click on (or just clicked on)
 
+
 --- What demographic data or subjective judgements are collected from each user, and why: --- 
-todo
+On page 4 of the paper, the authors note, "Twenty-four participants (12 females) were recruited through on-campus advertising. All were regular computer users, were between the ages of 19–45 (M = 25.5)". Thus, the following demographic data are collected in my experiment:
+- participant's age
+- participant's sex
+- frequency of computer usage
+
+On page 4 of the paper, the authors note, "subjective data was collected using 7-point Likert scales on difficulty, satisfaction, efficiency and frustration. At the end of the study, a questionnaire asked for comparative rankings of the menu conditions." Thus, the following subjective judgements are collected for both types of tests (control and ephemeral):
+- difficulty on a 7-point Likert scale: "I found the menus difficult to use."
+- satisfaction on a 7-point Likert scale: "I am satisfied with how the menus worked."
+- efficiency on a 7-point Likert scale: "I found the menus efficient to use."
+- frustration on a 7-point Likert scale: "I am frustrated with how the menus worked."
+Menu preference between the control and ephemeral conditions is also collected.
+
 
 --- List of websites I referenced while programming the experiment: --- 
 - https://stackoverflow.com/questions/13952686/how-to-make-html-input-tag-only-accept-numerical-values
@@ -107,3 +119,4 @@ https://stackoverflow.com/questions/3087975/how-can-i-make-the-cursor-a-hand-whe
 - https://stackoverflow.com/questions/16206322/how-to-get-js-variable-to-retain-value-after-page-refresh
 - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
 - https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
+- https://stackoverflow.com/questions/12081814/have-an-issue-with-box-shadow-inset-bottom-only

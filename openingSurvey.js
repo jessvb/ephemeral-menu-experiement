@@ -17,9 +17,11 @@ function submitAndGo() {
   age = document.getElementById('age').value;
   sex = document.getElementById('sex').value;
   computerUsage = document.getElementById('compUsage').value;
-  email = document.getElementById('email').value;
-  if (userID == null || age == null || sex == null || computerUsage == null ||
-      email == null) {
+  // email = document.getElementById('email').value;
+  if (
+      userID == null || age == null || sex == null || computerUsage == null
+      // || email == null) {
+  ) {
     console.error(
         'There is an unanswered question. Please report this error to the experimenter.');
     console.error('Collected answers:', userID, age, sex, computerUsage, email);

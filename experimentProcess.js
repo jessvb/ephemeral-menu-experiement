@@ -1,6 +1,3 @@
-// TODO: CREATE PAGE WHERE YOU CAN CHANGE THE NUM_TESTS_PER_BLOCK AND
-// NUM_PRACTICE_TESTS
-
 // This javascript file contains methods that run the experiment. The method,
 // "performExperiment" is called from experimentSetup to start the actual
 // experiment process.
@@ -40,6 +37,7 @@ let currCorrectItem;
 // the current test type (either 'control' or 'fading')
 let currTestType;
 // When menu opens, the fading process is started if currTestType == 'fading'
+
 
 // ---------------------------------------- //
 // --- Main Experiment Progress Methods --- //
