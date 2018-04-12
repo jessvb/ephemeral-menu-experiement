@@ -1,5 +1,9 @@
 // Get the user id as specified by the url parameter:
-let userID = localStorage.getItem("userID");
+let userID = localStorage.getItem('userID');
+
+// total "length" value for calculating progress
+const totalLengthVal = localStorage.getItem('totalLengthVal');
+
 // Make the url for the next page with the given userID:
 let url = 'closingPage.html?userID=' + userID;
 
@@ -21,17 +25,23 @@ function submitAndGo() {
   if (userID == null || menupref == null) {
     console.error(
         'There is an unanswered question. Please report this error to the experimenter.');
-    console.error(
-        'Collected answers:', userID, menupref);
+    console.error('Collected answers:', userID, menupref);
   } else {
     // send input
-    sendClosingSurvey(
-        userID, menupref);
+    sendClosingSurvey(userID, menupref);
 
     // go to next page (experiment page)
     window.location.href = url;
   }
 }
+
+// When the DOM is finished being created:
+document.addEventListener('DOMContentLoaded', function(event) {
+  // Set the progress bar.
+  // subtract 10 since we haven't completed the final survey yet.
+  let progress = (totalLengthVal - 10) / totalLengthVal;
+  document.getElementsByClassName('progressBar')[0].innerText = 'Progress: ' + Math.floor(progress * 100) + '%';
+});
 
 // The following function was made with: curl -sL goo.gl/jUkahv | python2 -
 // https://docs.google.com/forms/d/1Yw9xtBUoy5jDYmQlipbLXmy2JC3yW42ND8LyP7dz0H0/edit
@@ -39,19 +49,14 @@ function submitAndGo() {
 // Closing Survey submission function
 // submits to the google form at this URL:
 // docs.google.com/forms/d/1txsQ_gjhjbR-17g2SogKAPAF5LFei3HnBhX_lcoHoPI/edit
-function sendClosingSurvey(
-  userid,
-  menupref) {
-var formid = "e/1FAIpQLSeXYMvsTku5Aa1UGRLSTYvkOD7Hkk3iAADuLmwjltNpx3Grhg";
-var data = {
-  "entry.1764503663": userid,
-  "entry.1071152755": menupref
-};
-var params = [];
-for (key in data) {
-  params.push(key + "=" + encodeURIComponent(data[key]));
-}
-// Submit the form using an image to avoid CORS warnings.
-(new Image).src = "https://docs.google.com/forms/d/" + formid +
-   "/formResponse?" + params.join("&");
+function sendClosingSurvey(userid, menupref) {
+  var formid = 'e/1FAIpQLSeXYMvsTku5Aa1UGRLSTYvkOD7Hkk3iAADuLmwjltNpx3Grhg';
+  var data = {'entry.1764503663': userid, 'entry.1071152755': menupref};
+  var params = [];
+  for (key in data) {
+    params.push(key + '=' + encodeURIComponent(data[key]));
+  }
+  // Submit the form using an image to avoid CORS warnings.
+  (new Image).src = 'https://docs.google.com/forms/d/' + formid +
+      '/formResponse?' + params.join('&');
 }

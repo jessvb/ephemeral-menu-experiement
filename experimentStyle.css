@@ -14,9 +14,9 @@
     --margin-size: 1em;
     --padding-size: 1em;
     --thin-border-size: 1px;
+    --row-gap: 0.5rem;
     /* Animations */
-    --anim-onset-delay: 500;
-    /* ms */
+    --anim-onset-delay: 500; /* ms */
 }
 
 #experimentwrap {
@@ -24,7 +24,7 @@
     color: var(--colour-menu-font);
     /* Grid */
     display: grid;
-    grid-row-gap: 0.5rem;
+    grid-row-gap: var(--row-gap);
 }
 
 #promptarea {
@@ -40,7 +40,7 @@
     background-color: var(--colour-background);
     /* Grid */
     display: grid;
-    grid-template-rows: fit-content(100%) 82vh;
+    grid-template-rows: fit-content(100%) 80vh;
 }
 
 #taskbar {

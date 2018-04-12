@@ -20,8 +20,8 @@ function initLoggingEvents() {
     // runs at the end of start-up when the DOM is ready
     'DOMContentLoaded': function() {
       console.log('Your unique id is', uid);
-      Util.one('#bottomtext').innerHTML =
-          'Logging to the network as <nobr>' + uid + '</nobr>';
+      // todo del: Util.one('#bottomtext').innerHTML =
+      //     'Logging to the network as <nobr>' + uid + '</nobr>';
     },
     'log': function(evt) {
       var detail = evt.detail;
