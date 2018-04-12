@@ -1,5 +1,3 @@
-// TODO: TEST THE RESULTS FROM THE CLICKING IN THE GOOGLE FORMS
-
 // TODO: CREATE PAGE WHERE YOU CAN CHANGE THE NUM_TESTS_PER_BLOCK AND
 // NUM_PRACTICE_TESTS
 
@@ -17,8 +15,8 @@ const STAGES = [
 // TODO: RETURN TO ORIG!
 // const NUM_PRACTICE_TESTS = 8;
 // const NUM_TESTS_PER_BLOCK = 126;
-const NUM_PRACTICE_TESTS = 3;   // todo test
-const NUM_TESTS_PER_BLOCK = 8;  // todo test half block
+const NUM_PRACTICE_TESTS = 1;   // todo test
+const NUM_TESTS_PER_BLOCK = 4;  // todo test half block
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;
@@ -75,6 +73,10 @@ function goToNextStage() {
   stageIndex++;
   // get name of current stage
   currStage = STAGES[stageIndex];
+  // reset the number of tests completed in this stage (for progress bar)
+  currTest = 0;
+  // update progress bar
+  updateProgressBar();
 
   // Do different things, depending on the stage:
   let msg = '';
@@ -434,6 +436,8 @@ function showElement(id, displayType) {
  * Performs a single experiment test by setting various parameters.
  */
 function performSingleTest() {
+  // update the progress bar
+  updateProgressBar();
   // get a random menu item and set the prompt
   currCorrectItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
   setPrompt(currCorrectItem);
@@ -537,36 +541,6 @@ function getItemsToFade(predictedItems) {
   }
   return unpredicted;
 }
-
-/**
- * TODO DEL
- * Returns the UNpredicted items based on the predicted items. This function
- * returns ONLY the menuitems that are in the same menu as the predicted items.
- */
-// function getUnpredictedItems(predictedItems) {
-//   // find the unpredicted items based on the predicted items
-//   let unpredicted = new Array();
-//   let itemsInMenu =
-//       predictedItems[0].parentElement.parentElement.getElementsByClassName(
-//           'menuitem');
-//   // loop through all the menu items
-//   for (let i = 0; i < itemsInMenu.length; i++) {
-//     let isItemPredicted = false;
-//     let currItem = itemsInMenu[i];
-//     // check against all the predicted items
-//     for (let j = 0; j < predictedItems.length; j++) {
-//       if (currItem == predictedItems[j]) {
-//         isItemPredicted = true;
-//         break;
-//       }
-//     }
-//     // if the item isn't predicted, then add to the unpredicted list
-//     if (!isItemPredicted) {
-//       unpredicted.push(currItem);
-//     }
-//   }
-//   return unpredicted;
-// }
 
 /**
  * Get fake predicted items for the other menus
