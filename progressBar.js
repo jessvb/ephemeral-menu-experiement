@@ -4,6 +4,12 @@
 const totalLengthVal = getTotalLengthVal();
 localStorage.setItem('totalLengthVal', totalLengthVal);
 
+document.addEventListener('DOMContentLoaded', function(event) {
+  // set the value of a survey (note that the value of a single test is 1)
+  localStorage.setItem('surveyVal', 5);
+});
+
+
 /**
  * This updates the progress bar, providing feedback for the user.
  */
@@ -18,8 +24,9 @@ function updateProgressBar() {
 }
 
 function getTotalLengthVal() {
-  // total value includes end survey too, with a value of 10
-  return 10 + getCurrPosVal(STAGES.length);
+  // total value includes end survey too, with a value of surveyValue
+  return parseInt(localStorage.getItem('surveyVal')) +
+      getCurrPosVal(STAGES.length);
 }
 
 /**
@@ -47,11 +54,11 @@ function getCurrPosVal(stage) {
     }
   }
 
-  // each survey counts for 10 value points
+  // each survey counts for surveyValue points
   // each test counts for 1 value point
   // each completed practice counts for NUM_PRACTICE_TESTS
   // each completed half block counts for NUM_TESTS_PER_BLOCK / 2
-  return numSurveysComplete * 10 + currTest * 1 +
-      numPracticesComplete * NUM_PRACTICE_TESTS +
+  return numSurveysComplete * parseInt(localStorage.getItem('surveyVal')) +
+      currTest * 1 + numPracticesComplete * NUM_PRACTICE_TESTS +
       numHalfBlocksComplete * NUM_TESTS_PER_BLOCK / 2;
 }

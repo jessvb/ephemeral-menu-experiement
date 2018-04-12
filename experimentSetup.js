@@ -22,6 +22,7 @@ const NUM_ITEMS = 4;
 // number of predicted items:
 const NUM_PREDICTED_ITEMS = 3;
 
+
 // ------------------ //
 // --- On Startup --- //
 // ------------------ //
@@ -42,6 +43,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // Whether the control or the fading menu tests are first (within subjects) is
   // randomly assigned
   isControlFirst = getOrderOfControl();
+
+  // todo del:
+  // // --- random seeds --- //
+  // // The underlying test sequence is the same between blocks, but different per
+  // // user.
+
+  // // Thus, the random seed for the first half of each block:
+  // seed_half1 = userID;
+
+  // // The random seed for the second half of each block:
+  // // (Note: if you have more than 2000 users, you may get the same random
+  // // sequence for the first block of user1 and the second block of user2000
+  // // etc., but since we don't have 2000 users, this won't be an issue)
+  // seed_half1 = (userID + 1000) * 2;
 
   // ----------------------- //
   // --- Event Listeners --- //
@@ -280,5 +295,6 @@ function getOrderOfControl() {
  * @param seconds: length of time in seconds for the fading animation
  */
 function setLengthOfOnset(seconds) {
-  document.documentElement.style.setProperty('--duration-long-onset', seconds + 's');
+  document.documentElement.style.setProperty(
+      '--duration-long-onset', seconds + 's');
 }

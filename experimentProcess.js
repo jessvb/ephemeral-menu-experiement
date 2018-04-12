@@ -1,3 +1,5 @@
+// TODO: RE-RANDOMIZE THE MENU ITEMS WHEN YOU CHANGE BLOCKS!!
+
 // This javascript file contains methods that run the experiment. The method,
 // "performExperiment" is called from experimentSetup to start the actual
 // experiment process.
@@ -13,7 +15,7 @@ let STAGES = [
 // let NUM_PRACTICE_TESTS = 8;
 // let NUM_TESTS_PER_BLOCK = 126;
 let NUM_PRACTICE_TESTS = 1;   // todo test
-let NUM_TESTS_PER_BLOCK = 4;  // todo test half block
+let NUM_TESTS_PER_BLOCK = 2;  // todo test half block
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;
@@ -38,6 +40,13 @@ let currCorrectItem;
 let currTestType;
 // When menu opens, the fading process is started if currTestType == 'fading'
 
+// the random sequence of items (this is consistent between blocks, but the
+// menus are permuted)
+let randItemSeq = new Array();
+// the random sequence of menus for block 1
+let block1RandMenuSeq = new Array();
+// the random sequence of menus for block 2
+let block2RandMenuSeq = new Array();
 
 // ---------------------------------------- //
 // --- Main Experiment Progress Methods --- //
@@ -86,8 +95,12 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'practice1':
-      // reset the random seed to have the same default sequence for practice
-      Math.seedrandom(0);
+      // create the random sequence of items
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+
       // go to the practice sequence
       if (IS_CONTROL_FIRST) {
         performPractice('control');
@@ -103,10 +116,13 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block1_half1':
-      // reset the random seed based on the user id such that the random
-      // sequence is the same between control / fading blocks (but different per
-      // user)
-      Math.seedrandom(userID);
+      // create the random sequence of items if we haven't yet
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+
+      // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 1st half of control
         performHalfBlock('control');
@@ -121,6 +137,13 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block1_half2':
+      // make sure we've made the random sequence already
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+
+      // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 2nd half of control
         performHalfBlock('control');
@@ -140,8 +163,12 @@ function goToNextStage() {
       }
       break;
     case 'practice2':
-      // reset the random seed to have the same default sequence for practice
-      Math.seedrandom(0);
+      // create the random sequence of items if we haven't yet
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+      // perform the practice run
       if (IS_CONTROL_FIRST) {
         performPractice('fading');
       } else {
@@ -149,10 +176,13 @@ function goToNextStage() {
       }
       break;
     case 'block2_half1':
-      // reset the random seed based on the user id such that the random
-      // sequence is the same between control / fading blocks (but different per
-      // user)
-      Math.seedrandom(userID);
+      // make sure we've made the random sequence already
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+
+      // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 1st half of fading
         performHalfBlock('fading');
@@ -167,6 +197,13 @@ function goToNextStage() {
       notify(msg);
       break;
     case 'block2_half2':
+      // make sure we've made the random sequence already
+      if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
+        [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
+            getRandItemMenuSeqs();
+      }
+
+      // perform the half block
       if (IS_CONTROL_FIRST) {
         // perform 2nd half of fading
         performHalfBlock('fading');
@@ -436,8 +473,11 @@ function showElement(id, displayType) {
 function performSingleTest() {
   // update the progress bar
   updateProgressBar();
-  // get a random menu item and set the prompt
-  currCorrectItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
+  // get the correct item based on the current block and test number and set the
+  // prompt
+  currCorrectItem = getNextCorrectItem();
+  // todo del:
+  // getRandomItem(NUM_BLOCKS, NUM_ITEMS);
   setPrompt(currCorrectItem);
 }
 
@@ -574,4 +614,127 @@ function afterAnimation(target, animationName) {
   return Promise.all(animating.map(
       el => Util.when(
           el, 'animationend', evt => evt.animationName == animationName)));
+}
+
+/**
+ * Create a random sequence of items and menus based on a Zipf distribution.
+ * (Same sequence between blocks, different between users.)
+ *
+ * Returns an array in this format: [randItemSeq, block1RandMenuSeq,
+ * block2RandMenuSeq]
+ */
+function getRandItemMenuSeqs() {
+  // ensure that the seed is completely random
+  Math.seedrandom();
+
+  // the number of menus:
+  let numMenus = document.getElementsByClassName('menutitle').length;
+
+  // the number of items per menu:
+  let numItemsPerMenu = document.getElementById('menu1')
+                            .getElementsByClassName('menuitem')
+                            .length;
+
+  // choose 8 indices out of the number of items per menu to be chosen based on
+  // a Zipf distribution
+
+  // the Zipf distribution frequencies:
+  let zipf = [15, 8, 5, 4, 3, 3, 2, 2];
+
+  let indicesToChooseFrom = new Array;
+  for (let i = 0; i < zipf.length; i++) {
+    let index = Math.floor(Math.random() * numItemsPerMenu);
+    indicesToChooseFrom.push(index);
+  }
+
+  // the upper bounds for a random number to be between for the item to be
+  // chosen:
+  let zipfCumulative = new Array(zipf.length);
+  // first get the cumulative distribution
+  for (let i = 0; i < zipf.length; i++) {
+    if (i == 0) {
+      zipfCumulative[i] = zipf[i];
+    } else {
+      zipfCumulative[i] = zipfCumulative[i - 1] + zipf[i];
+    }
+  }
+  // get a random sequence of NUM_TESTS_PER_BLOCK items from the given indices
+  // using the zipf distribution
+  let itemIndices = new Array(NUM_TESTS_PER_BLOCK);
+  // (also get random menu sequences for both blocks)
+  let block1Menus = new Array(NUM_TESTS_PER_BLOCK);
+  let block2Menus = new Array(NUM_TESTS_PER_BLOCK);
+  for (let i = 0; i < NUM_TESTS_PER_BLOCK; i++) {
+    // now, get a random number between 1 and the total (last item in
+    // cumulative).
+    let randNum =
+        Math.floor(Math.random() * zipfCumulative[zipfCumulative.length - 1]);
+
+    // if the number is below cumulative[0], then choose the 0th item in indices
+    // to choose from; else if below cumulative[1], choose the 1st item in
+    // indices to choose from; etc.
+    for (let j = 0; j < zipfCumulative.length; j++) {
+      if (randNum < zipfCumulative[j]) {
+        itemIndices[i] = indicesToChooseFrom[j];
+        break;
+      }
+    }
+
+    // also choose a random menu for block 1:
+    block1Menus[i] = Math.floor(Math.random() * numMenus) + 1;
+    // choose a different random menu for block 2:
+    let different = false;
+    while (!different) {
+      let randMenuNum = Math.floor(Math.random() * numMenus) + 1;
+      if (randMenuNum != block1Menus[i]) {
+        block2Menus[i] = randMenuNum;
+        different = true;
+      }
+    }
+  }
+  // now we have random item indices, and random menus for both blocks!
+  return [itemIndices, block1Menus, block2Menus];
+}
+
+/**
+ * Gets the next correct item by using the zipf sequenced arrays for random
+ * items, and the random menu arrays.
+ */
+function getNextCorrectItem() {
+  // get the current test index so we can map it to the randomized sequence
+  let blockTestIndex = currTest;
+  // if we're in the second half of the block, add to the blockTestIndex
+  if (currStage.includes('half2')) {
+    blockTestIndex += Math.floor(NUM_TESTS_PER_BLOCK / 2);
+  }
+
+  // get the correct index of the item in a menu
+  let correctItemIndex = randItemSeq[blockTestIndex];
+
+  console.log('block1RandMenuSeq:', block1RandMenuSeq);
+  console.log('block2RandMenuSeq:', block2RandMenuSeq);
+  // get the correct menu number: if currently in block 1, use
+  // block1RandMenuSeq, else block2RandMenuSeq
+  let correctMenuNumber;
+  if (currStage.includes('block1')) {
+    // in block 1, use block1RandMenuSeq
+    correctMenuNumber = block1RandMenuSeq[blockTestIndex];
+  } else if (currStage.includes('block2')) {
+    // in block 2, use block2RandMenuSeq
+    correctMenuNumber = block2RandMenuSeq[blockTestIndex];
+  } else if (currStage.includes('practice')) {
+    // get any menu
+    correctMenuNumber =
+        block1RandMenuSeq[Math.floor(Math.random() * block1RandMenuSeq.length)];
+  } else {
+    console.error(
+        'We are trying to get a new item, but we are not in a block or practice stage. This should not occur.',
+        'Current stage: ', currStage);
+  }
+
+  console.log('correctMenuNumber:', correctMenuNumber);
+  // finally, get the correct item in the correct menu.
+  return document.getElementById('menu' + correctMenuNumber)
+      .getElementsByClassName('menuitem')
+      .item(correctItemIndex);
 }

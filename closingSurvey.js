@@ -38,9 +38,12 @@ function submitAndGo() {
 // When the DOM is finished being created:
 document.addEventListener('DOMContentLoaded', function(event) {
   // Set the progress bar.
-  // subtract 10 since we haven't completed the final survey yet.
-  let progress = (totalLengthVal - 10) / totalLengthVal;
-  document.getElementsByClassName('progressBar')[0].innerText = 'Progress: ' + Math.floor(progress * 100) + '%';
+  // subtract surveyVal since we haven't completed the final survey yet.
+  let progress =
+      (totalLengthVal - parseInt(localStorage.getItem('surveyVal'))) /
+      totalLengthVal;
+  document.getElementsByClassName('progressBar')[0].innerText =
+      'Progress: ' + Math.floor(progress * 100) + '%';
 });
 
 // The following function was made with: curl -sL goo.gl/jUkahv | python2 -
