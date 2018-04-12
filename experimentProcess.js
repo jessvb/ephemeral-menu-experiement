@@ -285,12 +285,18 @@ function performHalfBlock(controlOrFading) {
 // ---------------------- //
 
 /**
- * Update the items in the menus (e.g., when the user successfully clicks on the
- * item required, update the menus to contain different items)
- * @param {Integer} numBlocks: number of blocks within a menu
- * @param {Integer} numItems: number of items within a block
+ * Update the items in the menus (e.g., when the user moves to a new block)
  */
-function updateMenus(numBlocks, numItems) {
+function updateMenus() {
+   // number of blocks per menu:
+   let numBlocks = document.getElementById('menu1')
+                      .getElementsByClassName('menublock')
+                      .length;
+  // number of items per block:
+  let numItems = document.getElementById('menu1')
+                     .getElementsByClassName('menublock')[0]
+                     .getElementsByClassName('menuitem')
+                     .length;
   // Find menu divs in the html
   let menutitles = document.getElementsByClassName('menutitle');
   // loop through the menus and menu blocks and put different items inside

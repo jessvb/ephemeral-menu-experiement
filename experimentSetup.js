@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // Create menus with NUMBLOCKS subsections each and NUMITEMS items within each
   // subsection
   createMenus(NUM_BLOCKS, NUM_ITEMS);
-  updateMenus(NUM_BLOCKS, NUM_ITEMS);
+  updateMenus();
 
   // The accuracy is randomly chosen on a per-subject basis to be either high or
   // low (between subjects)
