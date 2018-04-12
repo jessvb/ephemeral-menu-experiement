@@ -1,15 +1,25 @@
+// TODO: ADD A COUPLE THINGS IN LOGGING... SEE EXPERIMENTSETUP.JS TODO
+// TODO: TEST THE RESULTS FROM THE CLICKING IN THE GOOGLE FORMS 
+
+// TODO: CREATE PAGE WHERE YOU CAN CHANGE THE NUM_TESTS_PER_BLOCK AND
+// NUM_PRACTICE_TESTS
+
 // This javascript file contains methods that run the experiment. The method,
 // "performExperiment" is called from experimentSetup to start the actual
 // experiment process.
 
 // stages in the experiment
 const STAGES = [
-  'notifypractice', 'practice1', 'block1_half1', 'shortBreak1', 'block1_half2',
-  'block1_survey', 'block2_half1', 'shortBreak2', 'notifypractice', 'practice2',
-  'block2_half2', 'block2_survey', 'end'
+  'notifypractice', 'practice1', 'notifyblock', 'block1_half1', 'shortBreak1',
+  'block1_half2', 'block1_survey', 'notifypractice', 'practice2', 'notifyblock',
+  'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end',
+  'goToClosingSurvey'
 ];
-const NUM_PRACTICE_TESTS = 8;
-const NUM_TESTS_PER_BLOCK = 126;
+// TODO: RETURN TO ORIG!
+// const NUM_PRACTICE_TESTS = 8;
+// const NUM_TESTS_PER_BLOCK = 126;
+const NUM_PRACTICE_TESTS = 3;   // todo test
+const NUM_TESTS_PER_BLOCK = 8;  // todo test half block
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;
@@ -32,8 +42,7 @@ let currCorrectItem;
 
 // the current test type (either 'control' or 'fading')
 let currTestType;
-// todo: when menu opens, either start the fading process (if currTestType ==
-// 'fading') or don't
+// When menu opens, the fading process is started if currTestType == 'fading'
 
 // ---------------------------------------- //
 // --- Main Experiment Progress Methods --- //
@@ -55,13 +64,13 @@ function performExperiment(adaptiveAccuracy, isControlFirst) {
   // Do the experiment in order of the stages.
   stageIndex = -1;
   goToNextStage();
-
-  // todo put in correct place:
-  // get the first correct item
-  // let correctItem = getRandomItem(NUM_BLOCKS, NUM_ITEMS);
-  // get predicted items based on this test's adaptiveAccuracy
 }
 
+/**
+ * This method moves the experiment to the next stage. It is repeated until the
+ * current stage is 'goToClosingSurvey', and then the user is taken to the
+ * closing survey.
+ */
 function goToNextStage() {
   // increment the stage index
   stageIndex++;
@@ -73,18 +82,31 @@ function goToNextStage() {
   switch (currStage) {
     case 'notifypractice':
       // show a notification screen telling the user that this is a practice run
-      let msg =
+      msg =
           'In the following stage, you will practice using the system. When you are ready to continue, click "Next".';
       notify(msg);
       break;
     case 'practice1':
+      // reset the random seed to have the same default sequence for practice
+      Math.seedrandom(0);
+      // go to the practice sequence
       if (IS_CONTROL_FIRST) {
         performPractice('control');
       } else {
         performPractice('fading');
       }
       break;
+    case 'notifyblock':
+      // show a notification screen telling the user that this is the real
+      // experiment
+      msg = 'In the following stage, you will use the system similarly to how you just used it in the practice stage. When you are ready to continue, click "Next".';
+      notify(msg);
+      break;
     case 'block1_half1':
+      // reset the random seed based on the user id such that the random
+      // sequence is the same between control / fading blocks (but different per
+      // user)
+      Math.seedrandom(userID);
       if (IS_CONTROL_FIRST) {
         // perform 1st half of control
         performHalfBlock('control');
@@ -108,16 +130,29 @@ function goToNextStage() {
       }
       break;
     case 'block1_survey':
+      // Show the survey. Once the user submits, it hides the survey and goes to
+      // the next stage.
       if (IS_CONTROL_FIRST) {
-        // TODO: add gotonextstage in the submit buttons for the
-        // conditionsurveys show control survey
         showElement('basicsurveywrap', 'grid');
       } else {
         // show gradual survey
         showElement('gradualsurveywrap', 'grid');
       }
       break;
+    case 'practice2':
+      // reset the random seed to have the same default sequence for practice
+      Math.seedrandom(0);
+      if (IS_CONTROL_FIRST) {
+        performPractice('fading');
+      } else {
+        performPractice('control');
+      }
+      break;
     case 'block2_half1':
+      // reset the random seed based on the user id such that the random
+      // sequence is the same between control / fading blocks (but different per
+      // user)
+      Math.seedrandom(userID);
       if (IS_CONTROL_FIRST) {
         // perform 1st half of fading
         performHalfBlock('fading');
@@ -154,6 +189,10 @@ function goToNextStage() {
           'This completes the menu-clicking portion of the experiment. We have one last question for you, and then the experiment will be done.';
       notify(msg);
       break;
+    case 'goToClosingSurvey':
+      // go to next page (closing survey)
+      window.location.href = 'closingSurvey.html';
+      break;
     default:
       console.error(
           'The stage, ' + currStage +
@@ -167,20 +206,20 @@ function goToNextStage() {
  * @param {String} controlOrFading: 'control' or 'fading' practice.
  */
 function performPractice(controlOrFading) {
-  // todo
   // set current test type as either control or fading
   currTestType = controlOrFading;
   // update the number of tests we're performing before the next stage
   currTotalTests = NUM_PRACTICE_TESTS;
+  // reset the current test value to zero
+  currTest = 0;
+  // ensure the menus are hidden at start
+  hideAllMenus();
   // show experimentwrap
   showElement('experimentwrap', 'grid');
-  // for __numPracticeTests
+  // The performSingleTest method continues to perform a single test until
+  // the number of tests reaches the currTotalTest value and then calls
+  // goToNextStage()
   performSingleTest();
-
-  // todo hide experimentwrap at end
-  // hideElement('experimentwrap');
-
-  // todo at end, call gotonextstage
 }
 
 /**
@@ -188,18 +227,20 @@ function performPractice(controlOrFading) {
  * @param {String} controlOrFading: 'control' or 'fading' practice.
  */
 function performHalfBlock(controlOrFading) {
-  // todo
   // set current test type as either control or fading
   currTestType = controlOrFading;
   // update the number of tests we're performing before the next stage
   currTotalTests = NUM_TESTS_PER_BLOCK / 2;
+  // reset the current test value to zero
+  currTest = 0;
+  // ensure the menus are hidden at start
+  hideAllMenus();
   // show experimentwrap
   showElement('experimentwrap', 'grid');
-  // for __numTests
-
-  // todo hide experimentwrap at end
-  // hideElement('experimentwrap');
-  // todo at end, call gotonextstage
+  // The performSingleTest method continues to perform a single test until
+  // the number of tests reaches the currTotalTest value and then calls
+  // goToNextStage()
+  performSingleTest();
 }
 
 // ---------------------- //
@@ -463,8 +504,8 @@ function getItemsToFade(predictedItems) {
     let menu = unpredictedMenus[i];
     let fakeCorrectItem = getRandomItemFromMenu(menu, NUM_BLOCKS);
     // now "predict" based on this fake correct item
-    let fakePredictions = getPredictedItems(
-        NUM_PREDICTED_ITEMS, fakeCorrectItem, 'low');
+    let fakePredictions =
+        getPredictedItems(NUM_PREDICTED_ITEMS, fakeCorrectItem, 'low');
 
     // add each of the fake predictions to the predictedItems list
     for (let j = 0; j < fakePredictions.length; j++) {

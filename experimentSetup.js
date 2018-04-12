@@ -1,8 +1,9 @@
 // This javascript file contains methods to set up the experiment, and calls
 // functions in experimentProcess to begin the experiment
 
+// TODO del:
 // For simpler testing, always use the same seed:
-Math.seedrandom(0);
+// Math.seedrandom(0);
 
 // ------------------------------ //
 // --- Variables to be logged --- //
@@ -12,9 +13,9 @@ let userID = localStorage.getItem('userID');
 // increment currentTestNum before every test: see currTest in
 // experimentProcess.js if the click starts a test, then put 'start', if it
 // ends, put 'end':
-let startOrEndEvent = 'start';
+let startOrEndEvent;
 // if this click was on an incorrect menu item, make this true:
-let wrongItemClick = true;
+let wrongItemClick;
 // increment this on every click:
 let clickNumber = 0;
 
@@ -49,27 +50,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // ----------------------- //
   // --- Event Listeners --- //
   // ----------------------- //
+
+  // Mouse down event listeners within the menu area:
   document.getElementById('menuarea')
       .addEventListener('mousedown', function(evt) {
-        // send information to the Google Form
-        document.dispatchEvent(new CustomEvent('log', {
-          // todo: update wrongItemClick and startOrEndEvent here (i.e., check
-          // against currCorrectItem -> end event, and the current menu -> start
-          // event)
-          detail: {
-            userID: userID,
-            event: evt,
-            customName: null,  // if customName is set, it overwrites the name
-            clickNumber: clickNumber++,
-            currentTestNum: currTest,
-            startOrEndEvent: startOrEndEvent,
-            wrongItemClick: wrongItemClick
-            // todo add: currTestType, adaptiveAccuracy, currStage, currTestNum
-          }
-        }));
+        // --- MOUSEDOWN: MENU OPENING AND CLOSING -- //
 
-        // --- MENU OPENING AND CLOSING -- //
-        // remove the fading animation from all menuitems before re-applying any
+        // initially set the event logging variables to defaults
+        startOrEndEvent = null;
+        wrongItemClick = false;
+
+        // remove the fading animation from all menuitems before applying any
         // animations
         let arrItems = Array.prototype.slice.call(
             document.getElementsByClassName('menuitem'));
@@ -104,17 +95,84 @@ document.addEventListener('DOMContentLoaded', function(event) {
               // this is the menu we clicked on
               // Toggle this menu between shown and not shown:
               toggleShowMenu(menudropdown);
+
+              // if this is the correct menu, and it is now open, set
+              // startOrEndEvent to 'start'
+              if (isVisible(menudropdown) &&
+                  menudropdown.parentElement.id ==
+                      currCorrectItem.parentElement.parentElement.parentElement
+                          .id) {
+                startOrEndEvent = 'start';
+              }
             }
           }
         } else {
           // the user clicked on something that wasn't a menu, so hide all menus
           hideAllMenus();
         }
-        // todo: if this was a menuitem, check if it was the correct item. If it
-        // was correct, increment the currTest value and check against
-        // currTotalTests
+
+        let nextStage = false;
+        let nextTest = false;
+        // If this is a menuitem...
+        if (classIncludes('menuitem', targ)) {
+          // if it's the correct menuitem:
+          if (targ == currCorrectItem) {
+            // increment the currTest value
+            currTest++;
+            // set this as an end event
+            startOrEndEvent = 'end';
+            // if we're done all the tests, go to the next stage (note:
+            // currTest is 0-indexed)
+            if (currTest >= currTotalTests) {
+              nextStage = true;
+            } else {
+              nextTest = true;
+            }
+          } else {
+            // if it's the wrong menuitem
+            wrongItemClick = true;
+          }
+        }
+
+        // --- MOUSEDOWN: LOG INFO TO GOOGLE FORM -- //
+        // log only if the current stage contains 'block'
+        if (currStage.includes('block')) {
+          document.dispatchEvent(new CustomEvent('log', {
+            // todo: update wrongItemClick and startOrEndEvent here (i.e., check
+            // against currCorrectItem -> end event, and the current menu ->
+            // start
+            // event)
+            detail: {
+              userID: userID,
+              event: evt,
+              customName: null,  // if customName is set, it overwrites the name
+              clickNumber: clickNumber++,
+              currentTestNum: currTest,
+              startOrEndEvent: startOrEndEvent,
+              wrongItemClick: wrongItemClick
+              // todo add: currTestType, adaptiveAccuracy, currStage,
+              // currTestNum
+            }
+          }));
+        }
+
+        // --- Go to next test or go to next stage --- //
+        // todo: check this!!
+        if (nextStage) {
+          // close all the menus
+          hideAllMenus();
+          // hide the experiment
+          hideElement('experimentwrap');
+          // go to the next stage
+          goToNextStage();
+        } else if (nextTest) {
+          performSingleTest();
+        }
       });
 
+  // ------------------------ //
+  // --- Experiment Start --- //
+  // ------------------------ //
 
   // Start the experiment -- see experimentProcess.js
   performExperiment(adaptiveAccuracy, isControlFirst);

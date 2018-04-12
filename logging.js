@@ -1,3 +1,4 @@
+// This file is based on MIT's 6.831 AS1 assignment file, logging.js
 // A simple Google-spreadsheet-based event logging framework.
 // This is currently set up to log every mousedown event
 
