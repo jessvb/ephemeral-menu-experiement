@@ -13,6 +13,13 @@
     --colour-progress: rgb(179, 179, 179);
     /* Sizes */
     --site-padding-size: 2em;
+    --max-par-width: 50em;
+    --line-height: 1.4em;
+    --bullet-spacing: 0.7em;
+    --h1-size: 2.5rem;
+    --h2-size: 1.75rem;
+    --box-shadow-inset: 10em;
+    --button-padding: 0.6em;
 }
 
 html,
@@ -28,14 +35,33 @@ body {
 /* Removes the margin that causes weird spacing issues at the top of the page */
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--h1-size);
     margin: 0;
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: var(--h2-size);
     font-weight: normal;
-    margin-top: 2em;
+    margin-top: var(--site-padding-size);
+}
+
+p {
+    max-width: var(--max-par-width);
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--line-height);
+}
+
+ul {
+    max-width: var(--max-par-width);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    line-height: var(--line-height);
+}
+
+li {
+    padding: var(--bullet-spacing) 0px;
 }
 
 #wholeSiteWrap,
@@ -45,22 +71,22 @@ h2 {
     padding: var(--site-padding-size);
     height: 100%;
     width: 100%;
-    box-shadow: inset 0em 10em 10em -10em rgba(0, 0, 0, .5);
+    box-shadow: inset 0em var(--box-shadow-inset) var(--box-shadow-inset) calc(-1 * var(--box-shadow-inset)) rgba(0, 0, 0, .5);
     text-align: center;
 }
 
 #buttonArea {
-    margin-top: 2.5em;
-    margin-bottom: 3em;
+    margin-top: var(--site-padding-size);
+    margin-bottom: calc(var(--site-padding-size) + 1rem);
 }
 
 input.button {
     border: none;
     background-color: var(--colour-white);
-    padding: 0.6em 1.2em;
+    padding: var(--button-padding) calc(2 * var(--button-padding));
     color: var(--colour-dark-grey);
     font-weight: bold;
-    border-radius: 0.3rem;
+    border-radius: calc(var(--button-padding) / 2);
     cursor: pointer;
 }
 
@@ -75,7 +101,7 @@ input.button.disabled {
 }
 
 video {
-    padding-bottom: 1em;
+    padding-bottom: calc(var(--site-padding-size) / 2);
     max-width: calc(100vw - var(--site-padding-size) * 2);
     max-height: 75vh;
 }

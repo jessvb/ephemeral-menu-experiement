@@ -1,5 +1,3 @@
-// TODO: RE-RANDOMIZE THE MENU ITEMS WHEN YOU CHANGE BLOCKS!!
-
 // This javascript file contains methods that run the experiment. The method,
 // "performExperiment" is called from experimentSetup to start the actual
 // experiment process.
@@ -88,7 +86,6 @@ function goToNextStage() {
   // Do different things, depending on the stage:
   if (!currStage.includes('notify') && !currStage.includes('survey') &&
       (currStage.includes('block') || currStage.includes('practice'))) {
-        console.log('IT DID IT!!!!!!!!!!!!!!!!', 'currStage:', currStage);
     // create the random sequence of items if it hasn't been created:
     if (randItemSeq.length < NUM_TESTS_PER_BLOCK) {
       [randItemSeq, block1RandMenuSeq, block2RandMenuSeq] =
@@ -461,8 +458,6 @@ function performSingleTest() {
   // get the correct item based on the current block and test number and set the
   // prompt
   currCorrectItem = getNextCorrectItem();
-  // todo del:
-  // getRandomItem(NUM_BLOCKS, NUM_ITEMS);
   setPrompt(currCorrectItem);
 }
 
@@ -696,8 +691,6 @@ function getNextCorrectItem() {
   // get the correct index of the item in a menu
   let correctItemIndex = randItemSeq[blockTestIndex];
 
-  console.log('block1RandMenuSeq:', block1RandMenuSeq);
-  console.log('block2RandMenuSeq:', block2RandMenuSeq);
   // get the correct menu number: if currently in block 1, use
   // block1RandMenuSeq, else block2RandMenuSeq
   let correctMenuNumber;
@@ -717,7 +710,6 @@ function getNextCorrectItem() {
         'Current stage: ', currStage);
   }
 
-  console.log('correctMenuNumber:', correctMenuNumber);
   // finally, get the correct item in the correct menu.
   return document.getElementById('menu' + correctMenuNumber)
       .getElementsByClassName('menuitem')

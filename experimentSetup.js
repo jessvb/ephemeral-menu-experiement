@@ -44,19 +44,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // randomly assigned
   isControlFirst = getOrderOfControl();
 
-  // todo del:
-  // // --- random seeds --- //
-  // // The underlying test sequence is the same between blocks, but different per
-  // // user.
-
-  // // Thus, the random seed for the first half of each block:
-  // seed_half1 = userID;
-
-  // // The random seed for the second half of each block:
-  // // (Note: if you have more than 2000 users, you may get the same random
-  // // sequence for the first block of user1 and the second block of user2000
-  // // etc., but since we don't have 2000 users, this won't be an issue)
-  // seed_half1 = (userID + 1000) * 2;
 
   // ----------------------- //
   // --- Event Listeners --- //
