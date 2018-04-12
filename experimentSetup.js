@@ -279,3 +279,12 @@ function getOrderOfControl() {
   }
   return controlFirst;
 }
+
+/**
+ * Set the length of the onset time for the fading animation in the ephemeral
+ * tests.
+ * @param seconds: length of time in seconds for the fading animation
+ */
+function setLengthOfOnset(seconds) {
+  document.documentElement.style.setProperty('--duration-long-onset', seconds + 's');
+}

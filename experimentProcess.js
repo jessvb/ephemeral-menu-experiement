@@ -6,17 +6,17 @@
 // experiment process.
 
 // stages in the experiment
-const STAGES = [
+let STAGES = [
   'notifypractice', 'practice1', 'notifyblock', 'block1_half1', 'shortBreak1',
   'block1_half2', 'block1_survey', 'notifypractice', 'practice2', 'notifyblock',
   'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end',
   'goToClosingSurvey'
 ];
 // TODO: RETURN TO ORIG!
-// const NUM_PRACTICE_TESTS = 8;
-// const NUM_TESTS_PER_BLOCK = 126;
-const NUM_PRACTICE_TESTS = 1;   // todo test
-const NUM_TESTS_PER_BLOCK = 4;  // todo test half block
+// let NUM_PRACTICE_TESTS = 8;
+// let NUM_TESTS_PER_BLOCK = 126;
+let NUM_PRACTICE_TESTS = 1;   // todo test
+let NUM_TESTS_PER_BLOCK = 4;  // todo test half block
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;

@@ -1,36 +1,97 @@
 --- RS1 by Jessica Van Brummelen ---
 
-Chosen Paper:
+--- Chosen Paper: --- 
 Ephemeral Adaptation: The Use of Gradual Onset to Improve Menu Selection Performance
 
-List of the people I discussed this assignment with:
+--- List of the people I discussed this assignment with: --- 
 - Geeticka Chauhan
 - Felix Naser
 - Vaikkunth Mugunthan
 
-URL of my YouTube/Vimeo screencast:
+--- URL of my YouTube/Vimeo screencast: --- 
 todo
 
 
-URL of my experiment implementation:
+--- URL of my experiment implementation: --- 
 todo
 
-How tasks are sequenced in my experimental implementation:
+--- How tasks are sequenced in my experimental implementation: --- 
+The stages of my experiment are sequenced as in the paper as follows:
+- Introduction to the experiment
+- Demographic survey
+- Practice stage (for control or ephemeral)
+- Half block of tests (for the same type of test as the previous practice test)
+- Short break
+- Second half block of tests (for the same type of test as the previous practice test)
+- Short survey about the type of test completed
+- Practice stage (for the type of test that has not yet been tested [control or ephermeral])
+- Half block of tests (for the same type of test as the previous practice test)
+- Short break
+- Second half block of tests (for the same type of test as the previous practice test)
+- Short survey about the second type of test completed
+- Closing survey that compares the two types of tests
+- "Thank you" closing page
+
+As noted in the paper, the adaptive accuracy (low or high) of the predictions for the ephemeral tests is a between-subjects factor, and changes per user. (See the "getAccuracy()" method in "experimentSetup.js".) The type of test (control or ephemeral) is a within-subjects factor. The type of test that comes first changes between users and is randomly assigned to users. (See the "getOrderOfControl()" method in "experimentSetup.js".)
+
+// TODO: SEQUENCING OF TESTS
+
+--- What the experimental parameters in your implementation are: ---
+The experimental parameters in my implementation that can be found in the "experimentProcess.js" file and are as follows:
+- STAGES: The order of the stages of the experiment. By default, the order of stages are as follows: STAGES = [
+  'notifypractice', 'practice1', 'notifyblock', 'block1_half1', 'shortBreak1',
+  'block1_half2', 'block1_survey', 'notifypractice', 'practice2', 'notifyblock',
+  'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end',
+  'goToClosingSurvey'
+];
+
+- NUM_PRACTICE_TESTS: The number of trials/tests for each practice stage. By default, NUM_PRACTICE_TESTS = 8;
+
+- NUM_TESTS_PER_BLOCK: The number of trials/tests for each block. By default, NUM_TESTS_PER_BLOCK = 126;
+
+- IS_CONTROL_FIRST: Whether the control block is first or the ephemeral block is first. If true, the control block is first. If false, the ephemeral block is first. By default, this is set randomly by the getOrderOfControl() method in the "experimentSetup.js" file.
+
+Additionally, for testing, one can change the currCorrectItem and currTestType variables to change which item should be clicked on to complete a test and which type of test the current test is (i.e., 'control' or 'fading', where 'fading' is equivalent to an ephemeral test) respectively.
+
+The final experimental parameter is the length of the fading animation for the ephemeral tests. This can be found in the 'animations.css' file and is called '--duration-long-onset'. By default, this value is 0.5s (500ms).
+
+
+--- How these parameters can be be adjusted: --- 
+These parameters can either be adjusted by changing the JavaScript file "experimentProcess.js" (and animations.css for the long onset length) or, after completing the demographic survey (on the page "gradualOnsetExperiment.html"), one can change the parameters from the console using the following commands:
+
+STAGES = ['practice1', 'block2_half1', ...]; // enter the order you would like
+
+NUM_PRACTICE_TESTS = 2; // or enter another integer
+
+NUM_TESTS_PER_BLOCK = 8; // or enter another integer (ideally a number that is divisible by two, since the blocks are split in two parts)
+
+IS_CONTROL_FIRST = false; // enter true for the control block to come first or false for the ephemeral block to come first
+
+currTestType = 'fading'; // either set to 'fading' for ephemeral or 'control' for control test
+
+setLengthOfOnset(0.25); // enter the desired length of time in seconds for the animation length
+
+
+--- What data is collected for each trial run and in what format: --- 
+The data collected for each trial run is as follows, and is collected every time the user clicks within the "menuarea" during a non-practice trial:
+- userID: the ID of the user, which increments every experiment
+- uid: the id of the browser and computer used
+- time: the time in seconds when the user clicked anywhere in the "menuarea"
+- name: the name of the event (e.g., 'mousedown')
+- targetID: the id of the item clicked in the "menuarea" (e.g., "menu1")
+- clickNumber: an integer that is incremented every time the user clicks (to ensure correct ordering of the data)
+- currentTestNum: the current trial number within the half-block (e.g., the '2nd' trial in the first control half-block)
+- startOrEndEvent: If the user clicks on the correct menu, this is set to 'start'. If the user clicks on the correct item within the menu, this is set to 'end'. (Otherwise, this is set to null.) The 'start' and 'end' events are used to calculate the time for a user to find the correct item within the menu.
+- wrongItemClick: whether the wrong item was clicked or not (if the user clicks an incorrect item, this is set to true)
+- currTestType: whether the current test is 'control' or 'fading' (ephemeral)
+- adaptiveAccuracy: whether the adaptiveAccuracy was 'high' or 'low' for this test
+- currStage: the current stage the user is in (e.g., 'block1_half1', 'block2_half1', etc.)
+- currCorrectItem: the name of the current item that the user should click on (or just clicked on)
+
+--- What demographic data or subjective judgements are collected from each user, and why: --- 
 todo
 
-What the experimental parameters in your implementation are:
-todo
-
-How these parameters can be be adjusted:
-todo
-
-What data is collected for each trial run and in what format:
-todo
-
-What demographic data or subjective judgements are collected from each user, and why:
-todo
-
-List of websites I referenced while programming the experiment:
+--- List of websites I referenced while programming the experiment: --- 
 - https://stackoverflow.com/questions/13952686/how-to-make-html-input-tag-only-accept-numerical-values
 - https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
