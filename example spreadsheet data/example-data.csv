@@ -1,0 +1,74 @@
+Opening Survey Data,,,,,,,,,,,,,,
+Timestamp,userID,uid,age,sex,computerUsage,pointingDevice,,,,,,,,
+4/13/2018 8:30,7,Windows-Chrome-042448478737977524,23,female,daily,mouse,,,,,,,,
+4/13/2018 8:32,6,Windows-Chrome-042448478737977524,23,female,daily,mouse,,,,,,,,
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,23,female,daily,mouse,,,,,,,,
+,,,,,,,,,,,,,,
+Network Log Data,,,,,,,,,,,,,,
+Timestamp,userID,uid,time,name,targetID,clickNumber,,,,,,,,
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu3,0,,,,,,,,
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,1,,,,,,,,
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu2,2,currentTestNum,startOrEndEvent,wrongItemClick,currTestType,adaptiveAccuracy,currStage,currTestNum,currCorrectItem
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,3,0,start,FALSE,fading,low,block1_half1,0,Bear
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu1,4,1,end,FALSE,fading,low,block1_half1,1,Bear
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,5,1,start,FALSE,fading,low,block1_half1,1,Ice Hockey
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu3,6,2,end,FALSE,fading,low,block1_half1,2,Ice Hockey
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,7,0,start,FALSE,fading,low,block1_half2,0,East
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu1,8,1,end,FALSE,fading,low,block1_half2,1,East
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,9,1,start,FALSE,fading,low,block1_half2,1,Lasagne
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu3,10,2,end,FALSE,fading,low,block1_half2,2,Lasagne
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,11,0,start,FALSE,control,low,block2_half1,0,DOS
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu3,12,1,end,FALSE,control,low,block2_half1,1,DOS
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,13,1,start,FALSE,control,low,block2_half1,1,Shelob
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menu2,14,2,end,FALSE,control,low,block2_half1,2,Shelob
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,1.52359E+12,mousedown,menuitem,15,0,start,FALSE,control,low,block2_half2,0,Coupe
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu3,0,1,end,FALSE,control,low,block2_half2,1,Coupe
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,1,1,start,FALSE,control,low,block2_half2,1,Rinkball
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu2,2,2,end,FALSE,control,low,block2_half2,2,Rinkball
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,3,0,start,FALSE,fading,high,block1_half1,0,Left
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu2,4,1,end,FALSE,fading,high,block1_half1,1,Left
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,5,1,start,FALSE,fading,high,block1_half1,1,Coupe
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu3,6,2,end,FALSE,fading,high,block1_half1,2,Coupe
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,7,0,start,FALSE,fading,high,block1_half2,0,Spaghetti
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu2,8,1,end,FALSE,fading,high,block1_half2,1,Spaghetti
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,9,1,start,FALSE,fading,high,block1_half2,1,Goldfish
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu3,10,2,end,FALSE,fading,high,block1_half2,2,Goldfish
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,11,0,start,FALSE,control,high,block2_half1,0,Gandalf
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu3,12,1,end,FALSE,control,high,block2_half1,1,Gandalf
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,13,1,start,FALSE,control,high,block2_half1,1,Chardonnay
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menu1,14,2,end,FALSE,control,high,block2_half1,2,Chardonnay
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1.52362E+12,mousedown,menuitem,15,0,start,FALSE,control,high,block2_half2,0,Rowing
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu3,0,1,end,FALSE,control,high,block2_half2,1,Rowing
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,1,1,start,FALSE,control,high,block2_half2,1,Fantasy
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu3,2,2,end,FALSE,control,high,block2_half2,2,Fantasy
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,3,0,start,FALSE,fading,high,block1_half1,0,Almond
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu1,4,1,end,FALSE,fading,high,block1_half1,1,Almond
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,5,1,start,FALSE,fading,high,block1_half1,1,Speed Skating
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu2,6,2,end,FALSE,fading,high,block1_half1,2,Speed Skating
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,7,0,start,FALSE,fading,high,block1_half2,0,Pearl
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu1,8,1,end,FALSE,fading,high,block1_half2,1,Pearl
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,9,1,start,FALSE,fading,high,block1_half2,1,Ontario
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu1,10,2,end,FALSE,fading,high,block1_half2,2,Ontario
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,11,0,start,FALSE,control,high,block2_half1,0,Romance
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu3,12,1,end,FALSE,control,high,block2_half1,1,Romance
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,13,1,start,FALSE,control,high,block2_half1,1,Goat
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menu3,14,2,end,FALSE,control,high,block2_half1,2,Goat
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,1.52362E+12,mousedown,menuitem,15,0,start,FALSE,control,high,block2_half2,0,Convertible
+,,,,,,,1,end,FALSE,control,high,block2_half2,1,Convertible
+Gradual Likert Survey Data,,,,,,,1,start,FALSE,control,high,block2_half2,1,Compact
+Timestamp,userID,uid,gradualLikert1,gradualLikert2,gradualLikert3,gradualLikert4,2,end,FALSE,control,high,block2_half2,2,Compact
+4/12/2018 23:40,7,Windows-Chrome-029159661753526134,1,1,1,1,,,,,,,,
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,1,1,1,1,,,,,,,,
+4/13/2018 8:43,42,Windows-Chrome-845373074773119,1,1,1,1,,,,,,,,
+,,,,,,,,,,,,,,
+Basic Likert Survey Data,,,,,,,,,,,,,,
+Timestamp,userID,uid,basicLikert1,basicLikert2,basicLikert3,basicLikert4,,,,,,,,
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,7,7,7,7,,,,,,,,
+4/13/2018 8:33,6,Windows-Chrome-042448478737977524,7,7,7,7,,,,,,,,
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,7,7,7,7,,,,,,,,
+,,,,,,,,,,,,,,
+Closing Survey Data,,,,,,,,,,,,,,
+Timestamp,userID,uid,menuPref,,,,,,,,,,,
+4/12/2018 23:41,7,Windows-Chrome-029159661753526134,basicMenu,,,,,,,,,,,
+4/13/2018 8:34,6,Windows-Chrome-042448478737977524,basicMenu,,,,,,,,,,,
+4/13/2018 8:44,42,Windows-Chrome-845373074773119,gradualOnset,,,,,,,,,,,

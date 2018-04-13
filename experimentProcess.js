@@ -9,11 +9,10 @@ let STAGES = [
   'block2_half1', 'shortBreak2', 'block2_half2', 'block2_survey', 'end',
   'goToClosingSurvey'
 ];
-// TODO: RETURN TO ORIG!
-// let NUM_PRACTICE_TESTS = 8;
-// let NUM_TESTS_PER_BLOCK = 126;
-let NUM_PRACTICE_TESTS = 2;   // todo test
-let NUM_TESTS_PER_BLOCK = 4;  // todo test half block
+let NUM_PRACTICE_TESTS = 8;
+let NUM_TESTS_PER_BLOCK = 126;
+// let NUM_PRACTICE_TESTS = 2;   // if testing
+// let NUM_TESTS_PER_BLOCK = 4;  // if testing
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;

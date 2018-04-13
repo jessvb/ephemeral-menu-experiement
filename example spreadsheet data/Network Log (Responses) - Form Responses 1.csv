@@ -1,0 +1,49 @@
+Timestamp,userID,uid,time,name,targetID,clickNumber,currentTestNum,startOrEndEvent,wrongItemClick,currTestType,adaptiveAccuracy,currStage,currTestNum,currCorrectItem
+4/12/2018 23:40:10,7,Windows-Chrome-029159661753526134,1523590810438,mousedown,menu3,0,0,start,FALSE,fading,low,block1_half1,0,Bear
+4/12/2018 23:40:11,7,Windows-Chrome-029159661753526134,1523590811871,mousedown,menuitem,1,1,end,FALSE,fading,low,block1_half1,1,Bear
+4/12/2018 23:40:12,7,Windows-Chrome-029159661753526134,1523590812861,mousedown,menu2,2,1,start,FALSE,fading,low,block1_half1,1,Ice Hockey
+4/12/2018 23:40:15,7,Windows-Chrome-029159661753526134,1523590815759,mousedown,menuitem,3,2,end,FALSE,fading,low,block1_half1,2,Ice Hockey
+4/12/2018 23:40:18,7,Windows-Chrome-029159661753526134,1523590818405,mousedown,menu1,4,0,start,FALSE,fading,low,block1_half2,0,East
+4/12/2018 23:40:19,7,Windows-Chrome-029159661753526134,1523590819512,mousedown,menuitem,5,1,end,FALSE,fading,low,block1_half2,1,East
+4/12/2018 23:40:20,7,Windows-Chrome-029159661753526134,1523590820654,mousedown,menu3,6,1,start,FALSE,fading,low,block1_half2,1,Lasagne
+4/12/2018 23:40:22,7,Windows-Chrome-029159661753526134,1523590822712,mousedown,menuitem,7,2,end,FALSE,fading,low,block1_half2,2,Lasagne
+4/12/2018 23:40:52,7,Windows-Chrome-029159661753526134,1523590853011,mousedown,menu1,8,0,start,FALSE,control,low,block2_half1,0,DOS
+4/12/2018 23:40:54,7,Windows-Chrome-029159661753526134,1523590854503,mousedown,menuitem,9,1,end,FALSE,control,low,block2_half1,1,DOS
+4/12/2018 23:40:55,7,Windows-Chrome-029159661753526134,1523590855873,mousedown,menu3,10,1,start,FALSE,control,low,block2_half1,1,Shelob
+4/12/2018 23:40:58,7,Windows-Chrome-029159661753526134,1523590858976,mousedown,menuitem,11,2,end,FALSE,control,low,block2_half1,2,Shelob
+4/12/2018 23:41:01,7,Windows-Chrome-029159661753526134,1523590861824,mousedown,menu3,12,0,start,FALSE,control,low,block2_half2,0,Coupe
+4/12/2018 23:41:04,7,Windows-Chrome-029159661753526134,1523590864185,mousedown,menuitem,13,1,end,FALSE,control,low,block2_half2,1,Coupe
+4/12/2018 23:41:05,7,Windows-Chrome-029159661753526134,1523590865736,mousedown,menu2,14,1,start,FALSE,control,low,block2_half2,1,Rinkball
+4/12/2018 23:41:07,7,Windows-Chrome-029159661753526134,1523590867763,mousedown,menuitem,15,2,end,FALSE,control,low,block2_half2,2,Rinkball
+4/13/2018 8:33:06,6,Windows-Chrome-042448478737977524,1523622787110,mousedown,menu3,0,0,start,FALSE,fading,high,block1_half1,0,Left
+4/13/2018 8:33:09,6,Windows-Chrome-042448478737977524,1523622790121,mousedown,menuitem,1,1,end,FALSE,fading,high,block1_half1,1,Left
+4/13/2018 8:33:11,6,Windows-Chrome-042448478737977524,1523622791437,mousedown,menu2,2,1,start,FALSE,fading,high,block1_half1,1,Coupe
+4/13/2018 8:33:12,6,Windows-Chrome-042448478737977524,1523622792514,mousedown,menuitem,3,2,end,FALSE,fading,high,block1_half1,2,Coupe
+4/13/2018 8:33:16,6,Windows-Chrome-042448478737977524,1523622796614,mousedown,menu2,4,0,start,FALSE,fading,high,block1_half2,0,Spaghetti
+4/13/2018 8:33:17,6,Windows-Chrome-042448478737977524,1523622797836,mousedown,menuitem,5,1,end,FALSE,fading,high,block1_half2,1,Spaghetti
+4/13/2018 8:33:18,6,Windows-Chrome-042448478737977524,1523622798854,mousedown,menu3,6,1,start,FALSE,fading,high,block1_half2,1,Goldfish
+4/13/2018 8:33:19,6,Windows-Chrome-042448478737977524,1523622800321,mousedown,menuitem,7,2,end,FALSE,fading,high,block1_half2,2,Goldfish
+4/13/2018 8:33:36,6,Windows-Chrome-042448478737977524,1523622817178,mousedown,menu2,8,0,start,FALSE,control,high,block2_half1,0,Gandalf
+4/13/2018 8:33:38,6,Windows-Chrome-042448478737977524,1523622819344,mousedown,menuitem,9,1,end,FALSE,control,high,block2_half1,1,Gandalf
+4/13/2018 8:33:40,6,Windows-Chrome-042448478737977524,1523622820537,mousedown,menu3,10,1,start,FALSE,control,high,block2_half1,1,Chardonnay
+4/13/2018 8:33:41,6,Windows-Chrome-042448478737977524,1523622822226,mousedown,menuitem,11,2,end,FALSE,control,high,block2_half1,2,Chardonnay
+4/13/2018 8:33:45,6,Windows-Chrome-042448478737977524,1523622825770,mousedown,menu3,12,0,start,FALSE,control,high,block2_half2,0,Rowing
+4/13/2018 8:33:47,6,Windows-Chrome-042448478737977524,1523622828147,mousedown,menuitem,13,1,end,FALSE,control,high,block2_half2,1,Rowing
+4/13/2018 8:33:48,6,Windows-Chrome-042448478737977524,1523622829186,mousedown,menu1,14,1,start,FALSE,control,high,block2_half2,1,Fantasy
+4/13/2018 8:33:51,6,Windows-Chrome-042448478737977524,1523622831721,mousedown,menuitem,15,2,end,FALSE,control,high,block2_half2,2,Fantasy
+4/13/2018 8:43:36,42,Windows-Chrome-845373074773119,1523623417142,mousedown,menu3,0,0,start,FALSE,fading,high,block1_half1,0,Almond
+4/13/2018 8:43:39,42,Windows-Chrome-845373074773119,1523623419721,mousedown,menuitem,1,1,end,FALSE,fading,high,block1_half1,1,Almond
+4/13/2018 8:43:40,42,Windows-Chrome-845373074773119,1523623420866,mousedown,menu3,2,1,start,FALSE,fading,high,block1_half1,1,Speed Skating
+4/13/2018 8:43:42,42,Windows-Chrome-845373074773119,1523623422786,mousedown,menuitem,3,2,end,FALSE,fading,high,block1_half1,2,Speed Skating
+4/13/2018 8:43:44,42,Windows-Chrome-845373074773119,1523623425048,mousedown,menu1,4,0,start,FALSE,fading,high,block1_half2,0,Pearl
+4/13/2018 8:43:47,42,Windows-Chrome-845373074773119,1523623427898,mousedown,menuitem,5,1,end,FALSE,fading,high,block1_half2,1,Pearl
+4/13/2018 8:43:48,42,Windows-Chrome-845373074773119,1523623428954,mousedown,menu2,6,1,start,FALSE,fading,high,block1_half2,1,Ontario
+4/13/2018 8:43:49,42,Windows-Chrome-845373074773119,1523623430179,mousedown,menuitem,7,2,end,FALSE,fading,high,block1_half2,2,Ontario
+4/13/2018 8:44:00,42,Windows-Chrome-845373074773119,1523623440795,mousedown,menu1,8,0,start,FALSE,control,high,block2_half1,0,Romance
+4/13/2018 8:44:01,42,Windows-Chrome-845373074773119,1523623442377,mousedown,menuitem,9,1,end,FALSE,control,high,block2_half1,1,Romance
+4/13/2018 8:44:03,42,Windows-Chrome-845373074773119,1523623443762,mousedown,menu1,10,1,start,FALSE,control,high,block2_half1,1,Goat
+4/13/2018 8:44:04,42,Windows-Chrome-845373074773119,1523623444795,mousedown,menuitem,11,2,end,FALSE,control,high,block2_half1,2,Goat
+4/13/2018 8:44:06,42,Windows-Chrome-845373074773119,1523623446811,mousedown,menu3,12,0,start,FALSE,control,high,block2_half2,0,Convertible
+4/13/2018 8:44:07,42,Windows-Chrome-845373074773119,1523623447737,mousedown,menuitem,13,1,end,FALSE,control,high,block2_half2,1,Convertible
+4/13/2018 8:44:08,42,Windows-Chrome-845373074773119,1523623448795,mousedown,menu3,14,1,start,FALSE,control,high,block2_half2,1,Compact
+4/13/2018 8:44:09,42,Windows-Chrome-845373074773119,1523623450129,mousedown,menuitem,15,2,end,FALSE,control,high,block2_half2,2,Compact
