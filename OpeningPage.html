@@ -10,6 +10,10 @@
 
     <!-- Load style sheets -->
     <link rel="stylesheet" href="generalStyle.css">
+
+    <!-- Load javascript -->
+    <script src="openingPage.js"></script>
+
 </head>
 
 <body>
@@ -36,28 +40,15 @@
             <p>Please watch the following experiment tasks video before proceeding.</p>
             <!-- todo del page with video to "shows each task to the user, with instructions if appropriate" -->
 
-            <video src="media/TODO_Placeholder_Video.mp4" controls>
+            <video src="media/RS1_tutorial.mp4" controls>
                 <p>Your browser doesn't support HTML5 video. Here is a
-                    <a href="media/TODO_Placeholder_Video.mp4">link to the video</a> instead.</p>
+                    <a href="media/RS1_tutorial.mp4">link to the video</a> instead.</p>
             </video>
             <h2>Survey</h2>
             <p>If you agree to participate in this experiment, please proceed to the next page to complete a brief survey.</p>
         </div>
         <div id="buttonArea">
             <input type="button" class="button" id="begin" value="Begin Survey">
-            <script>
-                // initialize userID in local storage (which persists past browser restarts)
-                if (localStorage.getItem("userID") == null) {
-                    localStorage.setItem("userID", 0);
-                }
-                let userID = parseInt(localStorage.getItem("userID")) + 1;
-                localStorage.setItem("userID", userID);
-                let url = 'openingSurvey.html?userID=' + userID;
-                let btn = document.getElementById("begin");
-                btn.addEventListener('click', function () {
-                    window.location.href = url;
-                });
-            </script>
         </div>
     </div>
 

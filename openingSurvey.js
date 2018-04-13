@@ -1,8 +1,3 @@
-// Get the user id as specified by the url parameter:
-let userID = localStorage.getItem('userID');
-// Make the url for the next page with the given userID:
-let url = 'gradualOnsetExperiment.html?userID=' + userID;
-
 /* ******************************************************* */
 /* ****** Functions Specific to the Opening Survey ******* */
 /* ******************************************************* */
@@ -12,6 +7,10 @@ let url = 'gradualOnsetExperiment.html?userID=' + userID;
  * the next page.
  */
 function submitAndGo() {
+  // Get the user id for this computer and person:
+  let userID = localStorage.getItem('userID');
+  let uid = localStorage.getItem('uid');
+
   let age, sex, computerUsage, email;
   // get user input
   age = document.getElementById('age').value;
@@ -19,7 +18,8 @@ function submitAndGo() {
   computerUsage = document.getElementById('compUsage').value;
   // email = document.getElementById('email').value;
   if (
-      userID == null || age == null || sex == null || computerUsage == null
+      userID == null || uid == null || age == null || sex == null ||
+      computerUsage == null
       // || email == null) {
   ) {
     console.error(
@@ -27,27 +27,27 @@ function submitAndGo() {
     console.error('Collected answers:', userID, age, sex, computerUsage, email);
   } else {
     // send input
-    sendOpeningSurvey(userID, age, sex, computerUsage, email);
+    sendOpeningSurvey(userID, uid, age, sex, computerUsage, email);
 
     // go to next page (experiment page)
-    window.location.href = url;
+    window.location.href = 'gradualOnsetExperiment.html';
   }
 }
 
 // The following function was made with: curl -sL goo.gl/jUkahv | python2 -
-// https://docs.google.com/forms/d/1f9qtQD0-huSpA0mMTRioZ8TgjR_oq1qBgnGWXmXO8ds/edit
+// https://docs.google.com/forms/d/1cjwOdJUqsqpqsWqllwyK2MYCzhkp5lb_ElrvrltfuLM/edit
 
 // Opening Survey submission function
 // submits to the google form at this URL:
-// docs.google.com/forms/d/1f9qtQD0-huSpA0mMTRioZ8TgjR_oq1qBgnGWXmXO8ds/edit
-function sendOpeningSurvey(userid, age, sex, computerusage, email) {
-  var formid = 'e/1FAIpQLSerVcxiOQjjudTDcQZ1JPn7Q-18ZiHV3GMjL7UQCIKYIPam3w';
+// docs.google.com/forms/d/1cjwOdJUqsqpqsWqllwyK2MYCzhkp5lb_ElrvrltfuLM/edit
+function sendOpeningSurvey(userid, uid, age, sex, computerusage) {
+  var formid = 'e/1FAIpQLScd3bGWrwzLRGFvO2Vn8czBQcCdYkZd5EUt1hccNeiAd_aoiA';
   var data = {
-    'entry.984098112': userid,
-    'entry.92610198': age,
-    'entry.152620830': sex,
-    'entry.576772796': computerusage,
-    'entry.1311721311': email
+    'entry.232033829': userid,
+    'entry.1656626167': uid,
+    'entry.1787724413': age,
+    'entry.1665193410': sex,
+    'entry.1102087624': computerusage
   };
   var params = [];
   for (key in data) {

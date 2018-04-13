@@ -12,8 +12,8 @@ let STAGES = [
 // TODO: RETURN TO ORIG!
 // let NUM_PRACTICE_TESTS = 8;
 // let NUM_TESTS_PER_BLOCK = 126;
-let NUM_PRACTICE_TESTS = 1;   // todo test
-let NUM_TESTS_PER_BLOCK = 2;  // todo test half block
+let NUM_PRACTICE_TESTS = 2;   // todo test
+let NUM_TESTS_PER_BLOCK = 4;  // todo test half block
 
 // whether control or fading menus is first
 let IS_CONTROL_FIRST;

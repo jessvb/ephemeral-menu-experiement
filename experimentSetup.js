@@ -4,8 +4,6 @@
 // ------------------------------ //
 // --- Variables to be logged --- //
 // ------------------------------ //
-// userID for this particular experiment (assoc w survey too):
-let userID = localStorage.getItem('userID');
 // increment currentTestNum before every test: see currTest in
 // experimentProcess.js if the click starts a test, then put 'start', if it
 // ends, put 'end':
@@ -131,6 +129,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
             wrongItemClick = true;
           }
         }
+
+        // userID for this particular experiment (assoc w survey too):
+        let userID = localStorage.getItem('userID');
 
         // --- MOUSEDOWN: LOG INFO TO GOOGLE FORM -- //
         // log only if the current stage contains 'block'

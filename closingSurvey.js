@@ -1,11 +1,5 @@
-// Get the user id as specified by the url parameter:
-let userID = localStorage.getItem('userID');
-
 // total "length" value for calculating progress
 const totalLengthVal = localStorage.getItem('totalLengthVal');
-
-// Make the url for the next page with the given userID:
-let url = 'closingPage.html?userID=' + userID;
 
 /* ******************************************************* */
 /* ****** Functions Specific to the Closing Survey ******* */
@@ -16,22 +10,25 @@ let url = 'closingPage.html?userID=' + userID;
  * the next page.
  */
 function submitAndGo() {
-  let menupref, graduallikert1, graduallikert2, graduallikert3, graduallikert4,
-      basiclikert1, basiclikert2, basiclikert3, basiclikert4;
+  // Get the user id for this computer and person:
+  let userID = localStorage.getItem('userID');
+  let uid = localStorage.getItem('uid');
+
+  let menupref;
   // get user input
   menupref = getSelectedRadio('menuType');
 
   // check for any nulls:
-  if (userID == null || menupref == null) {
+  if (userID == null || uid == null || menupref == null) {
     console.error(
         'There is an unanswered question. Please report this error to the experimenter.');
-    console.error('Collected answers:', userID, menupref);
+    console.error('Collected answers:', userID, uid, menupref);
   } else {
     // send input
-    sendClosingSurvey(userID, menupref);
+    sendClosingSurvey(userID, uid, menupref);
 
     // go to next page (experiment page)
-    window.location.href = url;
+    window.location.href = 'closingPage.html';
   }
 }
 
@@ -52,9 +49,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
 // Closing Survey submission function
 // submits to the google form at this URL:
 // docs.google.com/forms/d/1txsQ_gjhjbR-17g2SogKAPAF5LFei3HnBhX_lcoHoPI/edit
-function sendClosingSurvey(userid, menupref) {
+function sendClosingSurvey(userid, uid, menupref) {
   var formid = 'e/1FAIpQLSeXYMvsTku5Aa1UGRLSTYvkOD7Hkk3iAADuLmwjltNpx3Grhg';
-  var data = {'entry.1764503663': userid, 'entry.1071152755': menupref};
+  var data = {
+    'entry.1764503663': userid,
+    'entry.1043748381': uid,
+    'entry.1071152755': menupref
+  };
   var params = [];
   for (key in data) {
     params.push(key + '=' + encodeURIComponent(data[key]));

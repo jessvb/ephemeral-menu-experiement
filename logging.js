@@ -10,12 +10,14 @@ var EVENT_TYPES_TO_LOG = {mousedown: true};
 
 (function() {
 // A persistent unique id for the user.
-var uid = getUniqueId();
+var uid = localStorage.getItem('uid');
+
 
 // Initialize event listeners.
 function initLoggingEvents() {
   // Once the page is loaded, show our own unique id.
   Util.events(document, {
+
     // Final initalization entry point: the Javascript code inside this block
     // runs at the end of start-up when the DOM is ready
     'DOMContentLoaded': function() {
@@ -33,33 +35,6 @@ function initLoggingEvents() {
   // Listen to 'log' events which are triggered anywhere in the document.
 }
 
-// Parse user agent string by looking for recognized substring.
-function findFirstString(str, choices) {
-  for (var j = 0; j < choices.length; j++) {
-    if (str.indexOf(choices[j]) >= 0) {
-      return choices[j];
-    }
-  }
-  return '?';
-}
-
-// Genrates or remembers a somewhat-unique ID with distilled user-agent info.
-function getUniqueId() {
-  if (!('uid' in localStorage)) {
-    var browser = findFirstString(navigator.userAgent, [
-      'Seamonkey', 'Firefox', 'Chromium', 'Chrome', 'Safari', 'OPR', 'Opera',
-      'Edge', 'MSIE', 'Blink', 'Webkit', 'Gecko', 'Trident', 'Mozilla'
-    ]);
-    var os = findFirstString(navigator.userAgent, [
-               'Android', 'iOS', 'Symbian', 'Blackberry', 'Windows Phone',
-               'Windows', 'OS X', 'Linux', 'iOS', 'CrOS'
-             ]).replace(/ /g, '_');
-    var unique = ('' + Math.random()).substr(2);
-    localStorage['uid'] = os + '-' + browser + '-' + unique;
-  }
-  return localStorage['uid'];
-}
-
 // Log the given event.
 function logEvent(
     event, userid, customname, clicknumber, currenttestnum, startorendevent,
@@ -72,14 +47,13 @@ function logEvent(
   if (ENABLE_CONSOLE_LOGGING) {
     console.log(event.event.target);
     console.log(
-        //  uid,
-        userid, time, name, targetid, clicknumber, currenttestnum,
+        userid, uid, time, name, targetid, clicknumber, currenttestnum,
         startorendevent, wrongitemclick, currtesttype, adaptiveaccuracy,
         currstage, currtestnum, currcorrectitem);
   }
   if (ENABLE_NETWORK_LOGGING) {
     sendNetworkLog(
-        userID, uid, time, name, targetid, clicknumber, currenttestnum,
+        userid, uid, time, name, targetid, clicknumber, currenttestnum,
         startorendevent, wrongitemclick, currtesttype, adaptiveaccuracy,
         currstage, currtestnum, currcorrectitem);
   }

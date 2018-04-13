@@ -75,8 +75,8 @@ setLengthOfOnset(0.25); // enter the desired length of time in seconds for the a
 
 --- What data is collected for each trial run and in what format: --- 
 The data collected for each trial run is as follows, and is collected every time the user clicks within the "menuarea" during a non-practice trial:
-- userID: the ID of the user, which increments every experiment
-- uid: the id of the browser and computer used
+- userID: the ID of the user, which increments every experiment if performed on the same computer / browser
+- uid: the (essentially) unique id of the browser and computer used
 - time: the time in seconds when the user clicked anywhere in the "menuarea"
 - name: the name of the event (e.g., 'mousedown')
 - targetID: the id of the item clicked in the "menuarea" (e.g., "menu1")
@@ -91,7 +91,7 @@ The data collected for each trial run is as follows, and is collected every time
 
 
 --- What demographic data or subjective judgements are collected from each user, and why: --- 
-On page 4 of the paper, the authors note, "Twenty-four participants (12 females) were recruited through on-campus advertising. All were regular computer users, were between the ages of 19–45 (M = 25.5)". Thus, the following demographic data are collected in my experiment:
+On page 4 of the paper, the authors note, "Twenty-four participants (12 females) were recruited through on-campus advertising. All were regular computer users, were between the ages of 19ï¿½45 (M = 25.5)". Thus, the following demographic data are collected in my experiment:
 - participant's age
 - participant's sex
 - frequency of computer usage

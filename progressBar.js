@@ -4,11 +4,6 @@
 const totalLengthVal = getTotalLengthVal();
 localStorage.setItem('totalLengthVal', totalLengthVal);
 
-document.addEventListener('DOMContentLoaded', function(event) {
-  // set the value of a survey (note that the value of a single test is 1)
-  localStorage.setItem('surveyVal', 5);
-});
-
 
 /**
  * This updates the progress bar, providing feedback for the user.
