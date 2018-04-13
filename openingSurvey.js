@@ -16,18 +16,16 @@ function submitAndGo() {
   age = document.getElementById('age').value;
   sex = document.getElementById('sex').value;
   computerUsage = document.getElementById('compUsage').value;
-  // email = document.getElementById('email').value;
+  pointingDevice = document.getElementById('pointingDevice').value;
   if (
-      userID == null || uid == null || age == null || sex == null ||
-      computerUsage == null
-      // || email == null) {
-  ) {
+    userID == null || uid == null || age == null || sex == null ||
+    computerUsage == null || pointingDevice == null) {
     console.error(
-        'There is an unanswered question. Please report this error to the experimenter.');
-    console.error('Collected answers:', userID, age, sex, computerUsage, email);
+      'There is an unanswered question. Please report this error to the experimenter.');
+    console.error('Collected answers:', userID, age, sex, computerUsage, pointingDevice);
   } else {
     // send input
-    sendOpeningSurvey(userID, uid, age, sex, computerUsage, email);
+    sendOpeningSurvey(userID, uid, age, sex, computerUsage, pointingDevice);
 
     // go to next page (experiment page)
     window.location.href = 'gradualOnsetExperiment.html';
@@ -40,20 +38,27 @@ function submitAndGo() {
 // Opening Survey submission function
 // submits to the google form at this URL:
 // docs.google.com/forms/d/1cjwOdJUqsqpqsWqllwyK2MYCzhkp5lb_ElrvrltfuLM/edit
-function sendOpeningSurvey(userid, uid, age, sex, computerusage) {
-  var formid = 'e/1FAIpQLScd3bGWrwzLRGFvO2Vn8czBQcCdYkZd5EUt1hccNeiAd_aoiA';
+function sendOpeningSurvey(
+  userid,
+  uid,
+  age,
+  sex,
+  computerusage,
+  pointingdevice) {
+  var formid = "e/1FAIpQLScd3bGWrwzLRGFvO2Vn8czBQcCdYkZd5EUt1hccNeiAd_aoiA";
   var data = {
-    'entry.232033829': userid,
-    'entry.1656626167': uid,
-    'entry.1787724413': age,
-    'entry.1665193410': sex,
-    'entry.1102087624': computerusage
+    "entry.232033829": userid,
+    "entry.1656626167": uid,
+    "entry.1787724413": age,
+    "entry.1665193410": sex,
+    "entry.1102087624": computerusage,
+    "entry.769108803": pointingdevice
   };
   var params = [];
   for (key in data) {
-    params.push(key + '=' + encodeURIComponent(data[key]));
+    params.push(key + "=" + encodeURIComponent(data[key]));
   }
   // Submit the form using an image to avoid CORS warnings.
-  (new Image).src = 'https://docs.google.com/forms/d/' + formid +
-      '/formResponse?' + params.join('&');
+  (new Image).src = "https://docs.google.com/forms/d/" + formid +
+    "/formResponse?" + params.join("&");
 }
